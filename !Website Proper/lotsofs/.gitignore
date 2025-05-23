@@ -1,4 +1,5 @@
 secure/*
-database/*
+database/*.sqlite
+database/*.db
 !*.gitinclude
 

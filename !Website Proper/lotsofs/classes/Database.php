@@ -1,20 +1,20 @@
 <?php
 
 class Database {
-    public $connection;
+    public $pdo;
     
     public function __construct($config, $username='', $password='') {
         $dsn = "sqlite:database/{$config['dbname']}";
-        $pdo = new PDO($dsn, $username, $password);
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $pdo->exec("PRAGMA foreign_keys = ON");
-        $this->connection = $pdo;
+        $connection = new PDO($dsn, $username, $password);
+        $connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $connection->exec("PRAGMA foreign_keys = ON");
+        $this->pdo = $connection;
     }
     
     public function query($query, $params = []) {
         try {
-            $stm = $this->connection->prepare($query);
+            $stm = $this->pdo->prepare($query);
             $stm->execute($params);
 
             return $stm;
@@ -22,6 +22,17 @@ class Database {
         catch (PDOException $e) {
     	    http_response_code(500);
     	    dd($e);
+        }
+    }
+
+    public function execSQL($sql) {
+        try {
+            $this->pdo->exec($sql);
+            return true;
+        }
+        catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
         }
     }
 }

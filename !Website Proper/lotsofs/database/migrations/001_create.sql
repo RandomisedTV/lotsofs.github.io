@@ -1,0 +1,85 @@
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE IF NOT EXISTS COMPOSITION (
+    id INTEGER PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS  SONG (
+    id INTEGER PRIMARY KEY,
+    composition_id INTEGER NOT NULL,
+    subtitle TEXT,
+    version TEXT,
+    FOREIGN KEY (composition_id) REFERENCES COMPOSITION(id)
+);
+
+CREATE TABLE IF NOT EXISTS  SONG_COVER (
+    id INTEGER PRIMARY KEY,
+    original_id INTEGER NOT NULL,
+    cover_id INTEGER NOT NULL,
+    type TEXT NOT NULL,
+    FOREIGN KEY (original_id) REFERENCES SONG(id),
+    FOREIGN KEY (cover_id) REFERENCES SONG(id)
+);
+
+CREATE TABLE IF NOT EXISTS  ARTIST (
+    id INTEGER PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS  SONG_ARTIST (
+    id INTEGER PRIMARY KEY,
+    song_id INTEGER NOT NULL,
+    artist_id INTEGER NOT NULL,
+    role TEXT,
+    is_primary BOOLEAN NOT NULL DEFAULT 1,
+    FOREIGN KEY (song_id) REFERENCES SONG(id),
+    FOREIGN KEY (artist_id) REFERENCES ARTIST(id)
+);
+
+CREATE TABLE IF NOT EXISTS  ARTIST_ALIAS (
+    id INTEGER PRIMARY KEY,
+    artist_id INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    is_actual BOOLEAN NOT NULL DEFAULT 0,
+    FOREIGN KEY (artist_id) REFERENCES ARTIST(id)
+);
+
+CREATE TABLE IF NOT EXISTS  ALBUM (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    year INTEGER,
+    type TEXT NOT NULL
+);
+
+-- CREATE TABLE IF NOT EXISTS  ALBUM_VERSION (
+--     id INTEGER PRIMARY KEY,
+--     album_id INTEGER NOT NULL,
+--     edition TEXT,
+--     FOREIGN KEY (album_id) REFERENCES ALBUM(id)
+-- );
+
+CREATE TABLE IF NOT EXISTS  ALBUM_ARTIST (
+    id INTEGER PRIMARY KEY,
+    artist_id INTEGER NOT NULL,
+    album_id INTEGER NOT NULL,
+    is_primary BOOLEAN NOT NULL DEFAULT 1,
+    FOREIGN KEY (artist_id) REFERENCES ARTIST(id),
+    FOREIGN KEY (album_id) REFERENCES ALBUM(id)
+);
+
+CREATE TABLE IF NOT EXISTS  TRACK (
+    id INTEGER PRIMARY KEY,
+    song_id INTEGER NOT NULL,
+    album_id INTEGER NOT NULL,
+    disc INTEGER,
+    track_number INTEGER,
+    title TEXT,
+    duration INTEGER,
+    year INTEGER,
+    -- special_edition TEXT,
+    FOREIGN KEY (song_id) REFERENCES SONG(id),
+    FOREIGN KEY (album_id) REFERENCES ALBUM(id)
+)
+
+-- investigate:
+-- CREATE VIEW fast_access_song_details AS ....
+-- CREATE INDEX index_song_version ON SONG(Version);

@@ -9,21 +9,17 @@ $config = require('config.php');
 $db_config = php_sapi_name() === 'cli-server' ? $config['database_test'] : $config['database'];
 
 $db = new Database($db_config);
+
+$migrationPath = __DIR__ .'/database/migrations';
+$sqlFiles = glob($migrationPath . '/*.sql');
+sort($sqlFiles);
+
+foreach($sqlFiles as $file) {
+    $sql = file_get_contents($file);
+    $db->execSQL($sql);
+}
+
 $id = "1"; // To be dynamically assigned later
-
-$query = "CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL UNIQUE
-)";
-$db->query($query);
-
-$query = "CREATE TABLE IF NOT EXISTS tests (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    text TEXT NOT NULL,
-    user_id INTEGER NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE RESTRICT
-)";
-$db->query($query);
 
 $query = "SELECT * FROM tests WHERE id = :id";
 $params = [':id' => $id];

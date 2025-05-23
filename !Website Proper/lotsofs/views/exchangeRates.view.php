@@ -6,7 +6,7 @@
 	Currency Exchange Rates
 </h1>
 <p>
-	Data last updated on <span id=exchangeRatesUpdateDate>2025-05-02</span>
+	Data last updated on <span id=exchangeRatesUpdateDate>1970-01-01</span>
 </p>
 <table>
 	<thead>
