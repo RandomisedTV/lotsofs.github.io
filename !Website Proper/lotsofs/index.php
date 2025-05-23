@@ -1,7 +1,6 @@
 <?php
 
 require 'util.php';
-require 'router.php';
 
 require 'classes/Database.php';
 
@@ -19,10 +18,5 @@ foreach($sqlFiles as $file) {
     $db->execSQL($sql);
 }
 
-$id = "1"; // To be dynamically assigned later
-
-$query = "SELECT * FROM tests WHERE id = :id";
-$params = [':id' => $id];
-dd($db->query($query, $params)->fetchAll(PDO::FETCH_ASSOC));
-
-
+$data_artistNames = $db->selectAllFromTable("ARTIST_ALIAS");  // TODO: PHP is asinine about scope. This doesnt get passed along because the router is a function and this is not and its dumb
+require 'router.php';

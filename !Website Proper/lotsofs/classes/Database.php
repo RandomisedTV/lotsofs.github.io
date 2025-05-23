@@ -25,6 +25,18 @@ class Database {
         }
     }
 
+    public function selectAllFromTable($tableName) {
+        try {
+            $query = "SELECT * FROM ".$tableName;
+            $stm = $this->query($query);
+            return $stm->fetchAll();
+        }
+        catch (PDOException $e) {
+            http_response_code(500);
+            dd($e);
+        }
+    }
+
     public function execSQL($sql) {
         try {
             $this->pdo->exec($sql);

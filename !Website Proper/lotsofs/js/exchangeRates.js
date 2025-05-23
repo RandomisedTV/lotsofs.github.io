@@ -77,13 +77,6 @@ function getIsoEntry(alphaCode) {
 	return EMPTY_ISO_ENTRY
 }
 
-function appendChildToElement(parent, childTag, childTextContent) {
-	const element = document.createElement(childTag)
-	element.textContent = childTextContent
-	parent.appendChild(element)
-	return element
-}
-
 function addCurrencyTableRow(tableElement, alphaCode, rate) {
 	const isoInfo = getIsoEntry(alphaCode)
 		
