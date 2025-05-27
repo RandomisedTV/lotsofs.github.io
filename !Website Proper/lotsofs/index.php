@@ -18,5 +18,5 @@ foreach($sqlFiles as $file) {
     $db->execSQL($sql);
 }
 
-$data_artistNames = $db->selectAllFromTable("ARTIST_ALIAS");  // TODO: PHP is asinine about scope. This doesnt get passed along because the router is a function and this is not and its dumb
+$globalData['artistNames'] = $db->selectAllFromTable("ARTIST_ALIAS");
 require 'router.php';

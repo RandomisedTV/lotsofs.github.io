@@ -68,32 +68,42 @@
 	</tbody>
 </table>
 
-<?= json_encode($data_artistNames) ?> <!-- todo -->
-
 <script>
-	const data_artistNames = <?= json_encode($data_artistNames) ?> //  todo
-	// ---
-	console.log(data_artistNames);
+	const data_artistNames = <?= json_encode($globalData['artistNames']) ?>;
 	
 	const jsonInput = document.getElementById("jsonInput");
 	const jsonFormat_Message = document.getElementById("jsonFormat_Message");
 	const jsonFormat_ArtistTable = document.getElementById("jsonFormat_ArtistTable");
 
-	function buildTableHtml(data) {
-		jsonFormat_ArtistTable.innerHTML = "";
-		if (!data) return;
+	function buildTableHtml(data_userInput) {
+		if (!data_userInput) return;
 
-		data.forEach(item => {
+		data_userInput.forEach(item => {
 			const artist = escapeHtml(item.Artist || item.artist || '');
-			const rowElement = appendChildToElement(jsonFormat_ArtistTable, "tr", "");
-			appendChildToElement(rowElement, "td", artist);
-			const dropdownCellElement = appendChildToElement(rowElement, "td", "");
-			const inputDropDownElement = appendChildToElement(dropdownCellElement, "input", "");
+			const tr_ClassName = "artist_" + artist;
+			const tr_Exists = jsonFormat_ArtistTable.querySelector(`tr[data_artist="${CSS.escape(artist)}"]`);
+			if (tr_Exists) {
+				return;
+			}
+
+			const tr_Element = appendChildToElement(jsonFormat_ArtistTable, "tr", "");
+			tr_Element.setAttribute('data_artist', artist);
+			
+			appendChildToElement(tr_Element, "td", artist);
+			
+			const td_Element = appendChildToElement(tr_Element, "td", "");
+			const dropDown_Element = appendChildToElement(td_Element, "select", "");
+			appendChildToElement(dropDown_Element, "option", "<New>");
+			appendChildToElement(dropDown_Element, "option", "<Skip>");
+			data_artistNames.forEach(aName => {
+				appendChildToElement(dropDown_Element, "option", aName);
+			});
 		});
 	}
 
 	jsonInput.addEventListener('input', () => {
 		const text = jsonInput.value;
+		jsonFormat_ArtistTable.innerHTML = "";
 		if (!text) {
 			jsonFormat_Message.innerHTML = "";
 			return
@@ -108,7 +118,7 @@
 			buildTableHtml(data);
 		}
 		catch (e) {
-			jsonFormat_Message.innerHTML = "Invalid JSON";
+			jsonFormat_Message.innerHTML = "Invalid JSON " + e;
 		}
 	});
 
