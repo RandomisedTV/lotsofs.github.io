@@ -67,6 +67,7 @@
 
 	</tbody>
 </table>
+<button id="jsonFormat_SubmitButton">Submit Artists</button>
 
 <script>
 	const data_artistNames = <?= json_encode($globalData['artistNames']) ?>;
@@ -74,25 +75,34 @@
 	const jsonInput = document.getElementById("jsonInput");
 	const jsonFormat_Message = document.getElementById("jsonFormat_Message");
 	const jsonFormat_ArtistTable = document.getElementById("jsonFormat_ArtistTable");
+	const jsonFormat_ArtistSubmit = document.getElementById("jsonFormat_SubmitButton");
 
 	function buildTableHtml(data_userInput) {
 		if (!data_userInput) return;
 
 		data_userInput.forEach(item => {
+			// get the artist from our input data
 			const artist = escapeHtml(item.Artist || item.artist || '');
+			// create tablerow
 			const tr_ClassName = "artist_" + artist;
 			const tr_Exists = jsonFormat_ArtistTable.querySelector(`tr[data_artist="${CSS.escape(artist)}"]`);
 			if (tr_Exists) {
 				return;
 			}
-
-			const tr_Element = appendChildToElement(jsonFormat_ArtistTable, "tr", "");
+			const tr_Element = appendChildToElement(jsonFormat_ArtistTable, "tr");
 			tr_Element.setAttribute('data_artist', artist);
 			
+			// create cell that contains our input name
 			appendChildToElement(tr_Element, "td", artist);
 			
+			// create cell with dropdown + input field + checkbox
 			const td_Element = appendChildToElement(tr_Element, "td", "");
-			const dropDown_Element = appendChildToElement(td_Element, "select", "");
+			const dropDown_Element = appendChildToElement(td_Element, "select");
+			appendChildToElement(td_Element, "input");
+			const checkBox_Element = appendChildToElement(td_Element, "input");
+			checkBox_Element.type = "checkbox";
+			
+			// populate dropdown list
 			appendChildToElement(dropDown_Element, "option", "<New>");
 			appendChildToElement(dropDown_Element, "option", "<Skip>");
 			data_artistNames.forEach(aName => {
@@ -120,6 +130,13 @@
 		catch (e) {
 			jsonFormat_Message.innerHTML = "Invalid JSON " + e;
 		}
+	});
+
+	jsonFormat_ArtistSubmit.addEventListener('click', () => {
+		const rows = jsonFormat_ArtistTable.querySelectorAll("tr[data_artist]");
+		rows.forEach(row => {
+			
+		});
 	});
 
 	// function addCurrencyTableRow(tableElement, alphaCode, rate) {
