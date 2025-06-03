@@ -98,13 +98,16 @@
 			// create cell with dropdown + input field + checkbox
 			const td_Element = appendChildToElement(tr_Element, "td", "");
 			const dropDown_Element = appendChildToElement(td_Element, "select");
-			appendChildToElement(td_Element, "input");
+			const textInput_Element = appendChildToElement(td_Element, "input");
+			textInput_Element.type = "text";
 			const checkBox_Element = appendChildToElement(td_Element, "input");
 			checkBox_Element.type = "checkbox";
 			
 			// populate dropdown list
-			appendChildToElement(dropDown_Element, "option", "<New>");
-			appendChildToElement(dropDown_Element, "option", "<Skip>");
+			const optionNew = appendChildToElement(dropDown_Element, "option", "<New>");
+			optionNew.value = "0";
+			const optionSkip = appendChildToElement(dropDown_Element, "option", "<Skip>");
+			optionSkip.value = "-1";
 			data_artistNames.forEach(aName => {
 				appendChildToElement(dropDown_Element, "option", aName);
 			});
@@ -133,10 +136,28 @@
 	});
 
 	jsonFormat_ArtistSubmit.addEventListener('click', () => {
+		const newArtists = [];		
+
 		const rows = jsonFormat_ArtistTable.querySelectorAll("tr[data_artist]");
 		rows.forEach(row => {
-			
+			const artist = row.getAttribute("data_artist");
+			const select = row.querySelector("select");
+			const input = row.querySelector("input[type='text']");
+			const checkbox = row.querySelector("input[type='checkbox'");
+
+			if (select && select.value === "0") {
+				newArtists.push({
+					artist_id: select.value,
+					name: input.value.trim(),
+					is_actual: checkbox.checked,
+				});
+			}
 		});
+		if (newArtists.length === 0) {
+			return;
+		}
+
+		// fetch
 	});
 
 	// function addCurrencyTableRow(tableElement, alphaCode, rate) {
