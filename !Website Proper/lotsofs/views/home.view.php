@@ -148,16 +148,26 @@
 			if (select && select.value === "0") {
 				newArtists.push({
 					artist_id: select.value,
-					name: input.value.trim(),
-					is_actual: checkbox.checked,
+					og_name: input.value.trim(),
+					provided_name: artist,
 				});
 			}
 		});
 		if (newArtists.length === 0) {
 			return;
 		}
-
-		// fetch
+		fetch("ajax/ajax.php", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(newArtists)
+		})
+		.then(response => response.text())
+		.then(data => {
+			console.log(data);
+		})
+		.catch(error => console.error(error));
 	});
 
 	// function addCurrencyTableRow(tableElement, alphaCode, rate) {
