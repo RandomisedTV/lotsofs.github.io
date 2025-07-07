@@ -109,12 +109,13 @@
 			const optionSkip = appendChildToElement(dropDown_Element, "option", "<Skip>");
 			optionSkip.value = "-1";
 			data_artistNames.forEach(aName => {
-				appendChildToElement(dropDown_Element, "option", aName);
+				const optionArtist = appendChildToElement(dropDown_Element, "option", aName);
+				// optionArtist.value = TODO: get the data id thing
 			});
 		});
 	}
 
-	jsonInput.addEventListener('input', () => {
+	function parsePastedJson() {
 		const text = jsonInput.value;
 		jsonFormat_ArtistTable.innerHTML = "";
 		if (!text) {
@@ -133,7 +134,8 @@
 		catch (e) {
 			jsonFormat_Message.innerHTML = "Invalid JSON " + e;
 		}
-	});
+	}
+	jsonInput.addEventListener('input', parsePastedJson);
 
 	jsonFormat_ArtistSubmit.addEventListener('click', () => {
 		const newArtists = [];		
