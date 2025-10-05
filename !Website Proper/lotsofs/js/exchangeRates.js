@@ -1,4 +1,5 @@
 const ISO4217_PATH = "json/iso4217.json"
+const EXCHANGE_RATES_PATH = "json/exchangeRates.json"
 
 const RATE_DISPLAY_DECIMALS = 5
 const ELEMENT_CURRENCY_TABLE_ID = "exchangeRates"
@@ -18,24 +19,48 @@ let currencyWhiteList = false
 // const exchangeRates = <?= $exchangeRatesJson ?>
 // let iso4217 = [] // {"alphabeticCode": "AAA", "numericCode": "000", "minorUnit":0, "withdrawalDate":"","currency":"Name","entity":"COUNTRY"},
 
-let exchangeRatesUpdateDate = "1970-01-01"
-let baseAlphaCode = ""
-let exchangeRates = {}
-let iso4217 = []
+let exchangeRatesData = "";
+let exchangeRatesUpdateDate = "1970-01-01";
+let baseAlphaCode = "";
+let exchangeRates = {};
+let iso4217 = [];
 
-function processExchangeRates(data) {
-	// exchangeRates = rates
-	if (!data) {
-		const errorElement = document.getElementById(exchangeRateReadError)
-		exchangeRateReadError.textContent = "Failed to get exchange rates."
-		return
-	}
+function processExchangeRates() {
+	// // exchangeRates = rates
+	// if (!data) {
+	// 	const errorElement = document.getElementById(exchangeRateReadError)
+	// 	exchangeRateReadError.textContent = "Failed to get exchange rates."
+	// 	return
+	// }
 	
-	exchangeRatesUpdateDate = data.date
-	baseAlphaCode = data.base
-	exchangeRates = data.rates
+	readExchangeRates();
 	readIso4217()
-	updateLabels()
+	// updateLabels()
+}
+
+function readExchangeRates() {
+	fetch(EXCHANGE_RATES_PATH)
+	.then(response => response.json())
+	.then(data => {
+		processExchangeRatesData(data);
+	})
+}
+
+function processExchangeRatesData(data) {
+	const { base, date, rates } = data;
+	baseAlphaCode = base;
+	exchangeRatesUpdateDate = date;
+	exchangeRates = rates;
+}
+
+function readIso4217() {
+	fetch(ISO4217_PATH)
+	.then(response => response.json())
+	.then(data => {
+		iso4217 = data;
+		displayExchangeRates();
+	})
+	.catch(error => console.error("Error loading currency data (ISO 4217)", error))
 }
 
 function updateLabels() {
@@ -45,15 +70,7 @@ function updateLabels() {
 	}
 }
 
-function readIso4217() {
-	fetch(ISO4217_PATH)
-	.then(response => response.json())
-	.then(data => {
-		iso4217 = data
-		displayExchangeRates()
-	})
-	.catch(error => console.error("Error loading currency data (ISO 4217)", error))
-}
+
 
 function getSortedExchangeRates() {
 	// This takes the ISO4217 list, exchange rates list, merges them & returns sorted

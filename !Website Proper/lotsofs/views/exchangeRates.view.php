@@ -29,7 +29,7 @@
 
 <script src="js/exchangeRates.js"></script>
 <script>
-	processExchangeRates(<?= $exchangeRatesJson ?>)
+	processExchangeRates()
 </script>
 
 <?php require('views/partials/foot.php') ?>
