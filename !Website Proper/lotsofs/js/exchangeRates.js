@@ -25,7 +25,7 @@ let baseAlphaCode = "";
 let exchangeRates = {};
 let iso4217 = [];
 
-function processExchangeRates() {
+async function processExchangeRates() {
 	// // exchangeRates = rates
 	// if (!data) {
 	// 	const errorElement = document.getElementById(exchangeRateReadError)
@@ -33,17 +33,29 @@ function processExchangeRates() {
 	// 	return
 	// }
 	
-	readExchangeRates();
-	readIso4217()
+	exchangeRates = await readExchangeRates();
+	iso4217 = await readIso4217();
+	console.log(getSortedExchangeRates());
+	console.log(iso4217);
+	displayExchangeRates();
+	// populate table in DOM with whatever data I receive from the iso4217
+
+	
+	// readExchangeRates();
+	// readIso4217()
 	// updateLabels()
 }
 
-function readExchangeRates() {
-	fetch(EXCHANGE_RATES_PATH)
-	.then(response => response.json())
-	.then(data => {
-		processExchangeRatesData(data);
-	})
+async function readExchangeRates() {
+	const response = await fetch(EXCHANGE_RATES_PATH);
+	if (!response.ok) throw new Error("Failed to load exchange rates");
+	return await response.json();
+}
+
+async function readIso4217() {
+	const response = await fetch(ISO4217_PATH);
+	if (!response.ok) throw new Error("Failed to load iso 4217");
+	return await response.json();
 }
 
 function processExchangeRatesData(data) {
@@ -53,15 +65,15 @@ function processExchangeRatesData(data) {
 	exchangeRates = rates;
 }
 
-function readIso4217() {
-	fetch(ISO4217_PATH)
-	.then(response => response.json())
-	.then(data => {
-		iso4217 = data;
-		displayExchangeRates();
-	})
-	.catch(error => console.error("Error loading currency data (ISO 4217)", error))
-}
+// function readIso4217() {
+// 	fetch(ISO4217_PATH)
+// 	.then(response => response.json())
+// 	.then(data => {
+// 		iso4217 = data;
+// 		displayExchangeRates();
+// 	})
+// 	.catch(error => console.error("Error loading currency data (ISO 4217)", error))
+// }
 
 function updateLabels() {
 	const dateElement = document.getElementById(exchangeRatesUpdateDate);
@@ -75,11 +87,11 @@ function updateLabels() {
 function getSortedExchangeRates() {
 	// This takes the ISO4217 list, exchange rates list, merges them & returns sorted
 	iso4217.forEach(item => {
-		if (!exchangeRates.hasOwnProperty(item.alphabeticCode)) {
-			exchangeRates[item.alphabeticCode] = -1
+		if (!exchangeRates.rates.hasOwnProperty(item.alphabeticCode)) {
+			exchangeRates.rates[item.alphabeticCode] = -1
 		}
 	})
-	return Object.entries(exchangeRates).sort(([a],[b]) => a.localeCompare(b))
+	return Object.entries(exchangeRates.rates).sort(([a],[b]) => a.localeCompare(b))
 }
 
 function getIsoEntry(alphaCode) {

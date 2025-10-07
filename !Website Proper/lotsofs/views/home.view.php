@@ -46,7 +46,7 @@
 <script src="js/exchangeRates.js"></script>
 <script>
 	currencyWhiteList = ["CHF", "DKK", "EUR", "GBP", "IDR", "MYR", "NPR", "SEK", "TRY", "USD"]
-	processExchangeRates(<?= $exchangeRatesJson ?>)
+	processExchangeRates()
 </script>
 
 <textarea id="jsonInput" placeholder='Example: 
