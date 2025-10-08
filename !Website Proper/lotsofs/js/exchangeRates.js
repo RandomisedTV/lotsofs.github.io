@@ -1,9 +1,10 @@
-const ISO4217_PATH = "json/iso4217.json"
-const EXCHANGE_RATES_PATH = "json/exchangeRates.json"
+const ISO4217_PATH = "json/iso4217.json";
+const EXCHANGE_RATES_PATH = "json/exchangeRates.json";
 
-const RATE_DISPLAY_DECIMALS = 5
-const ELEMENT_CURRENCY_TABLE_ID = "exchangeRates"
-const ELEMENT_CURRENCY_INPUT_FIELD_ID = "currencyExchangeRate_calcBox"
+const RATE_DISPLAY_DECIMALS = 5;
+const ELEMENT_CURRENCY_TABLE_ID = "exchangeRates";
+const ELEMENT_CURRENCY_INPUT_FIELD_ID = "currencyExchangeRate_calcBox";
+const ELEMENT_DATE_ID = "exchangeRatesUpdateDate";
 
 const EMPTY_ISO_ENTRY = {
 	"alphabeticCode": "", 
@@ -19,11 +20,16 @@ let currencyWhiteList = false
 // const exchangeRates = <?= $exchangeRatesJson ?>
 // let iso4217 = [] // {"alphabeticCode": "AAA", "numericCode": "000", "minorUnit":0, "withdrawalDate":"","currency":"Name","entity":"COUNTRY"},
 
-let exchangeRatesData = "";
-let exchangeRatesUpdateDate = "1970-01-01";
-let baseAlphaCode = "";
-let exchangeRates = {};
-let iso4217 = [];
+// let exchangeRatesData = "";
+// let exchangeRatesUpdateDate = "1970-01-01";
+// let baseAlphaCode = "";
+let exchangeRates;
+let iso4217;
+let sortedExchangeRates;
+
+// =========
+// READ DATA
+// =========
 
 async function processExchangeRates() {
 	// // exchangeRates = rates
@@ -35,79 +41,83 @@ async function processExchangeRates() {
 	
 	exchangeRates = await readExchangeRates();
 	iso4217 = await readIso4217();
-	console.log(getSortedExchangeRates());
-	console.log(iso4217);
+	sortedExchangeRates = getSortedExchangeRates();
+	
+	updateInfo();
+
 	displayExchangeRates();
 	// populate table in DOM with whatever data I receive from the iso4217
 
 	
 	// readExchangeRates();
 	// readIso4217()
-	// updateLabels()
+	// updateInfo()
 }
 
+// Read exchange rates data from json
 async function readExchangeRates() {
 	const response = await fetch(EXCHANGE_RATES_PATH);
 	if (!response.ok) throw new Error("Failed to load exchange rates");
 	return await response.json();
 }
 
+// Read iso 4217 data from json
 async function readIso4217() {
 	const response = await fetch(ISO4217_PATH);
 	if (!response.ok) throw new Error("Failed to load iso 4217");
 	return await response.json();
 }
 
-function processExchangeRatesData(data) {
-	const { base, date, rates } = data;
-	baseAlphaCode = base;
-	exchangeRatesUpdateDate = date;
-	exchangeRates = rates;
-}
-
-// function readIso4217() {
-// 	fetch(ISO4217_PATH)
-// 	.then(response => response.json())
-// 	.then(data => {
-// 		iso4217 = data;
-// 		displayExchangeRates();
-// 	})
-// 	.catch(error => console.error("Error loading currency data (ISO 4217)", error))
-// }
-
-function updateLabels() {
-	const dateElement = document.getElementById(exchangeRatesUpdateDate);
-	if (dateElement) {
-		dateElement.textContent = exchangeRatesUpdateDate;
-	}
-}
-
-
-
+// takes the ISO4217 list, exchange rates list, mergess the & returns sorted
 function getSortedExchangeRates() {
-	// This takes the ISO4217 list, exchange rates list, merges them & returns sorted
 	iso4217.forEach(item => {
 		if (!exchangeRates.rates.hasOwnProperty(item.alphabeticCode)) {
 			exchangeRates.rates[item.alphabeticCode] = -1
 		}
 	})
-	return Object.entries(exchangeRates.rates).sort(([a],[b]) => a.localeCompare(b))
+	const keys = Object.keys(exchangeRates.rates).sort();
+	const result = {};
+	keys.forEach(key => {
+		result[key] = exchangeRates.rates[key];
+	});
+	return result;
 }
 
-function getIsoEntry(alphaCode) {
-	let entry = iso4217.find(item => item.alphabeticCode === alphaCode && item.withdrawalDate.trim() === "")
-	if (entry) {
-		return entry
+// =====================
+// ASSEMBLING HTML TABLE
+// =====================
+
+// Writes the date to the appropriate span element
+function updateInfo() {
+	const dateElement = document.getElementById(ELEMENT_DATE_ID);
+	if (dateElement) {
+		dateElement.textContent = exchangeRates.date;
 	}
-	entry = iso4217.find(item => item.alphabeticCode === alphaCode)
-	if (entry) {
-		return entry
-	}
-	return EMPTY_ISO_ENTRY
 }
 
+// Loop through all the exchange rates (applies whitelist if present)
+// and adds them to the html table
+function displayExchangeRates() {
+	const tableElement = document.getElementById(ELEMENT_CURRENCY_TABLE_ID)
+	if (currencyWhiteList) {
+		currencyWhiteList.forEach(alphaCode => {
+			let rate = sortedExchangeRates[alphaCode];
+			if (!rate) {
+				return;
+			}
+			addCurrencyTableRow(tableElement, alphaCode, rate);
+		});
+	}
+	else {
+		for (const [alphaCode, rate] of Object.entries(sortedExchangeRates)) {
+			addCurrencyTableRow(tableElement, alphaCode, rate);
+		}
+	}
+}
+
+// Add a currency table row to the html table
 function addCurrencyTableRow(tableElement, alphaCode, rate) {
-	const isoInfo = getIsoEntry(alphaCode)
+	const isoInfo = getIso4217Entry(alphaCode)
 		
 	const rowElement = appendChildToElement(tableElement, "tr", "")
 
@@ -132,32 +142,33 @@ function addCurrencyTableRow(tableElement, alphaCode, rate) {
 	}	
 }
 
-function displayExchangeRates() {
-	const sortedRates = getSortedExchangeRates()
-
-	const tableElement = document.getElementById(ELEMENT_CURRENCY_TABLE_ID)
-	if (currencyWhiteList) {
-		currencyWhiteList.forEach(alphaCode => {
-			let rate = sortedRates.find(item => item[0] == alphaCode)
-			if (!rate) {
-				return
-			}
-			rate = rate[1]
-			addCurrencyTableRow(tableElement, alphaCode, rate)
-		});
+// Find ISO4217 entry for this alpha code
+function getIso4217Entry(alphaCode) {
+	// Look for relevant entry
+	let entry = iso4217.find(item => item.alphabeticCode === alphaCode && item.withdrawalDate.trim() === "")
+	if (entry) {
+		return entry
 	}
-	else {
-		for (const [alphaCode, rate] of sortedRates) {
-			addCurrencyTableRow(tableElement, alphaCode, rate)
-		}
+	// Look for obsolete entry
+	entry = iso4217.find(item => item.alphabeticCode === alphaCode)
+	if (entry) {
+		return entry
 	}
+	// Return blank entry
+	return EMPTY_ISO_ENTRY
 }
 
+// =============
+// LIVE UPDATING
+// =============
+
+// If a calcbox is changed, also update the other ones
 function calculateConversions(fromCalcBox) {
 	const fromAlphaCode = fromCalcBox.id.slice(-3)
-	const fromRateInverse = 1/exchangeRates[fromAlphaCode]
+	const fromRateInverse = 1/exchangeRates.rates[fromAlphaCode]
 	const fromValue = fromCalcBox.value
 
+	const baseAlphaCode = exchangeRates.base;
 	const baseCalcBox = document.getElementById(`calc-${baseAlphaCode}`)
 	const baseIsoInfo = iso4217.find(item => item.alphabeticCode === baseAlphaCode && item.minorUnit >= 0)
 	const baseMinorUnit = baseIsoInfo ? baseIsoInfo.minorUnit : 2
@@ -169,7 +180,7 @@ function calculateConversions(fromCalcBox) {
 			return
 		}
 		const toAlphaCode = input.id.slice(-3)
-		const toRate = exchangeRates[toAlphaCode]
+		const toRate = exchangeRates.rates[toAlphaCode]
 		const toCalcBox = document.getElementById(`calc-${toAlphaCode}`)
 		const toIsoInfo = iso4217.find(item => item.alphabeticCode === toAlphaCode && item.minorUnit >= 0)
 		const toMinorUnit = toIsoInfo ? toIsoInfo.minorUnit : 2
