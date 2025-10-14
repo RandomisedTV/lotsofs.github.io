@@ -22,7 +22,8 @@ class Database {
         }
         catch (PDOException $e) {
     	    http_response_code(500);
-    	    dd($e);
+    	    // TODO: This won't do anything with ajax
+            dd($e);
         }
     }
 

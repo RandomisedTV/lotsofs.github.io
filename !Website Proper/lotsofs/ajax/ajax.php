@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			
 			if ($stmt) {
 				$newId = $db->pdo->lastInsertId();
-				$sql = "INSERT INTO ARTIST_ALIAS (artist_id, name, is_actual) VALUES (?, ?, ?)";
+				$sql = "INSERT INTO ARTIST_ALIAS (artist_id, name) VALUES (?, ?)";
 				$stmt = $db->query($sql, [$newId, $datum["provided_name"], 1]);
 			}
 		}

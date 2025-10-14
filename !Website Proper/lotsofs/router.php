@@ -1,5 +1,6 @@
 <?php
 
+
 $routes = [];
 
 include 'routes.php';
@@ -7,8 +8,7 @@ include 'swat4/routes.php';
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// serveDirectFile($uri);
-route($uri, $routes, $globalData);
+route($uri, $routes, $globalData, $config);
 
 // function serveDirectFile($uri) {
 // 	var_dump($uri);
@@ -21,7 +21,7 @@ route($uri, $routes, $globalData);
 // 	}
 // }
 
-function route($uri, $routes, $globalData) {
+function route($uri, $routes, $globalData, $config) {
 	if (array_key_exists($uri, $routes)) {
 		require $routes[$uri];
 	}
