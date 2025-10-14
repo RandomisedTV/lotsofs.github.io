@@ -12,6 +12,7 @@ $db = new Database($db_config);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$data = json_decode(file_get_contents("php://input"), true);
+	
 	foreach ($data as $datum) {
 		$id = $datum["artist_id"];
 		if ($id == 0) {
@@ -20,11 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			
 			if ($stmt) {
 				$newId = $db->pdo->lastInsertId();
-				// TODO: This aint done
+				$sql = "INSERT INTO ARTIST_ALIAS (artist_id, name, is_actual) VALUES (?, ?, ?)";
+				$stmt = $db->query($sql, [$newId, $datum["provided_name"], 1]);
 			}
-
-			// add new artist to SQLITE table ARTIST
-			// set ID to the id of the newly added artist in the SQLITE table
 		}
 		if ($id != -1) {
 			// we'll get to this later
