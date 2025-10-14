@@ -1,10 +1,11 @@
-const ISO4217_PATH = "json/iso4217.json";
-const EXCHANGE_RATES_PATH = "json/exchangeRates.json";
+const PATH_ISO4217 = "json/iso4217.json";
+const PATH_EXCHANGE_RATES = "json/exchangeRates.json";
 
-const RATE_DISPLAY_DECIMALS = 5;
 const ELEMENT_CURRENCY_TABLE_ID = "exchangeRates";
 const ELEMENT_CURRENCY_INPUT_FIELD_ID = "currencyExchangeRate_calcBox";
 const ELEMENT_DATE_ID = "exchangeRatesUpdateDate";
+
+const RATE_DISPLAY_DECIMALS = 5;
 
 const EMPTY_ISO_ENTRY = {
 	"alphabeticCode": "", 
@@ -17,12 +18,6 @@ const EMPTY_ISO_ENTRY = {
 
 let currencyWhiteList = false
 
-// const exchangeRates = <?= $exchangeRatesJson ?>
-// let iso4217 = [] // {"alphabeticCode": "AAA", "numericCode": "000", "minorUnit":0, "withdrawalDate":"","currency":"Name","entity":"COUNTRY"},
-
-// let exchangeRatesData = "";
-// let exchangeRatesUpdateDate = "1970-01-01";
-// let baseAlphaCode = "";
 let exchangeRates;
 let iso4217;
 let sortedExchangeRates;
@@ -32,13 +27,6 @@ let sortedExchangeRates;
 // =========
 
 async function processExchangeRates() {
-	// // exchangeRates = rates
-	// if (!data) {
-	// 	const errorElement = document.getElementById(exchangeRateReadError)
-	// 	exchangeRateReadError.textContent = "Failed to get exchange rates."
-	// 	return
-	// }
-	
 	exchangeRates = await readExchangeRates();
 	iso4217 = await readIso4217();
 	sortedExchangeRates = getSortedExchangeRates();
@@ -46,24 +34,18 @@ async function processExchangeRates() {
 	updateInfo();
 
 	displayExchangeRates();
-	// populate table in DOM with whatever data I receive from the iso4217
-
-	
-	// readExchangeRates();
-	// readIso4217()
-	// updateInfo()
 }
 
 // Read exchange rates data from json
 async function readExchangeRates() {
-	const response = await fetch(EXCHANGE_RATES_PATH);
+	const response = await fetch(PATH_EXCHANGE_RATES);
 	if (!response.ok) throw new Error("Failed to load exchange rates");
 	return await response.json();
 }
 
 // Read iso 4217 data from json
 async function readIso4217() {
-	const response = await fetch(ISO4217_PATH);
+	const response = await fetch(PATH_ISO4217);
 	if (!response.ok) throw new Error("Failed to load iso 4217");
 	return await response.json();
 }
