@@ -64,9 +64,13 @@
 			optionNew.value = "0";
 			const optionSkip = appendChildToElement(dropDown_Element, "option", "<Skip>");
 			optionSkip.value = "-1";
-			data_artistNames.forEach(aName => {
-				const optionArtist = appendChildToElement(dropDown_Element, "option", aName);
-				// optionArtist.value = TODO: get the data id thing
+			data_artistNames.forEach(a => {
+				const optionArtist = appendChildToElement(dropDown_Element, "option", a.name);
+				if (a.name == item.Artist) {
+					textInput_Element.value = a.name;
+					optionArtist.value = a.id;
+					dropDown_Element.value = a.id;
+				}
 			});
 		});
 	}
