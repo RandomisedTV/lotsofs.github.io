@@ -106,13 +106,14 @@
 			const select = row.querySelector("select");
 			const input = row.querySelector("input[type='text']");
 			const checkbox = row.querySelector("input[type='checkbox'");
-
-			if (select && select.value === "0") {
-				newArtists.push({
-					artist_id: select.value,
-					og_name: input.value.trim(),
-					provided_name: artist,
-				});
+			if (select) {
+				if (select.value != "-1") {
+					newArtists.push({
+						artist_id: select.value,
+						og_name: input.value.trim(),
+						provided_name: artist,
+					});
+				}
 			}
 		});
 		if (newArtists.length === 0) {
@@ -127,7 +128,7 @@
 		})
 		.then(response => response.text())
 		.then(data => {
-			console.log(data);
+			// console.log(data);
 		})
 		.catch(error => console.error(error));
 	});

@@ -2,7 +2,7 @@
 
 return [
     'database' => [
-        'dbname' => 'test_db.sqlite',
+        'dbname' => 'test.sqlite',
     ],
     'database_test' => [
         'dbname' => 'test_db.sqlite',

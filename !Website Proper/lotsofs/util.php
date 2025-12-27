@@ -1,5 +1,7 @@
 <?php
 
+define('__ROOT__', $_SERVER['DOCUMENT_ROOT']);
+
 $globalData = [];
 
 $config = require('config.php');
@@ -7,6 +9,7 @@ $config = require('config.php');
 function dd($value) {
 	echo "<pre>";
 	var_dump($value);
+	error_log($value);
 	echo "</pre>";
 
 	die();

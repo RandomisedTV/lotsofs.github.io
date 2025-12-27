@@ -6,15 +6,22 @@ $db_config = php_sapi_name() === 'cli-server' ? $config['database_test'] : $conf
 
 $db = new Database($db_config);
 
-$migrationPath = __DIR__ .'/database/migrations';
-$sqlFiles = glob($migrationPath . '/*.sql');
+$db->execSQL('PRAGMA foreign_keys = ON');
+
+$sqlFiles = glob(__ROOT__ .'/database/migrations/*.sql');
 sort($sqlFiles);
+
 
 foreach($sqlFiles as $file) {
     $sql = file_get_contents($file);
-    $db->execSQL($sql);
+    
+    $statements = array_filter(explode(";", $sql));
+
+    foreach ($statements as $stmt) {
+        $db->execSQL($stmt);
+    }
 }
 
-$globalData['artistNames'] = $db->selectAllFromTable("ARTIST_ALIAS");
+$globalData['artistNames'] = $db->selectAllFromTable("artist_alias");
 
 require "views/test.view.php";

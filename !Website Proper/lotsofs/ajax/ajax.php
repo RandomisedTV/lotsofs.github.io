@@ -12,22 +12,20 @@ $db = new Database($db_config);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$data = json_decode(file_get_contents("php://input"), true);
-	
 	foreach ($data as $datum) {
 		$id = $datum["artist_id"];
 		if ($id == 0) {
-			$sql = "INSERT INTO ARTIST DEFAULT VALUES";
+			$sql = "INSERT INTO artist DEFAULT VALUES";
 			$stmt = $db->query($sql);
 			
 			if ($stmt) {
-				$newId = $db->pdo->lastInsertId();
-				$sql = "INSERT INTO ARTIST_ALIAS (artist_id, name) VALUES (?, ?)";
-				$stmt = $db->query($sql, [$newId, $datum["provided_name"], 1]);
+				$id = $db->pdo->lastInsertId();
 			}
 		}
 		if ($id != -1) {
+			$sql = "INSERT OR IGNORE INTO artist_alias (artist_id, name) VALUES (?, ?)";
+			$stmt = $db->query($sql, [$id, $datum["og_name"]]);
 			// we'll get to this later
 		}
 	}
-	var_dump("DONE");
 }
