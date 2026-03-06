@@ -3,8 +3,9 @@
 
 $routes = [];
 
-include 'routes.php';
-include 'swat4/routes.php';
+include __MODULES__ . '/main/routes.php';
+include __MODULES__ . '/swat4/routes.php';
+// include __MODULES__ . '/ss2/routes.php';
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -34,5 +35,5 @@ function abort($code = 404, $message = "") {
 	http_response_code($code);
 	$responseCode = $code;
 	$errorMessage = $message;
-	require "routes/error.php";
+	require __MAIN__ . "/routes/error.php";
 }

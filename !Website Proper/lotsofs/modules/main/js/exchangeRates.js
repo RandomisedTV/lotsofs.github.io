@@ -1,5 +1,5 @@
-const PATH_ISO4217 = "json/iso4217.json";
-const PATH_EXCHANGE_RATES = "json/exchangeRates.json";
+const PATH_ISO4217 = "modules/main/json/iso4217.json";
+const PATH_EXCHANGE_RATES = "modules/main/json/exchangeRates.json";
 
 const ELEMENT_CURRENCY_TABLE_ID = "exchangeRates";
 const ELEMENT_CURRENCY_INPUT_FIELD_ID = "currencyExchangeRate_calcBox";

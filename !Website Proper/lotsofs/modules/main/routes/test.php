@@ -2,9 +2,9 @@
 
 $pageTitle = "Test Page";
 
-$db_config = php_sapi_name() === 'cli-server' ? $config['database_test'] : $config['database'];
+$dbName = php_sapi_name() === 'cli-server' ? "test_test_db.sqlite" : "live_test_db.sqlite";
 
-$db = new Database($db_config);
+$db = new Database($dbName);
 
 $db->execSQL('PRAGMA foreign_keys = ON');
 
@@ -24,4 +24,4 @@ foreach($sqlFiles as $file) {
 
 $globalData['artistNames'] = $db->selectAllFromTable("artist_alias");
 
-require "views/test.view.php";
+require __MAIN__ . "/views/test.view.php";

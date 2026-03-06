@@ -59,4 +59,5 @@
 
 </script>
 
-<?php require('views/partials/foot.php') ?>
+</body>
+</html>

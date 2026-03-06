@@ -1,6 +1,6 @@
-<?php require('views/partials/head.php') ?>
+<?php require(__MAIN__ . '/views/partials/head.php') ?>
 
-<?php require('views/partials/nav.php') ?>
+<?php require(__MAIN__ . '/views/partials/nav.php') ?>
 
 <h1>
 	Currency Exchange Rates
@@ -27,9 +27,9 @@
 <p id="exchangeRateReadError">
 </p>
 
-<script src="js/exchangeRates.js"></script>
+<script src="modules/main/js/exchangeRates.js"></script>
 <script>
 	processExchangeRates()
 </script>
 
-<?php require('views/partials/foot.php') ?>
+<?php require(__MAIN__ . '/views/partials/foot.php') ?>

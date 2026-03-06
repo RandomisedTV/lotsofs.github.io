@@ -1,6 +1,6 @@
-<?php require('views/partials/head.php') ?>
+<?php require(__MAIN__ . '/views/partials/head.php') ?>
 
-<?php require('views/partials/nav.php') ?>
+<?php require(__MAIN__ . '/views/partials/nav.php') ?>
 
 <textarea>
     

@@ -1,6 +1,9 @@
 <?php
 
 define('__ROOT__', $_SERVER['DOCUMENT_ROOT']);
+define('__MODULES__', __ROOT__ . '/modules');
+define('__MAIN__', __MODULES__ . '/main');
+define('__MAIN_URL__', '/modules/main');
 
 $globalData = [];
 
