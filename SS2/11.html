@@ -40,65 +40,217 @@
 	<!-- <a href="#" class="right">Link</a> -->
 </div>
 
-<div class="row">
-
-	<div class="main">
-		<h1>1.1 JUNGLE</h1>
-		<div class=toc>
-			<p><a href="#1">Chapter 1</a></p>
-			<p><a href="#2">Chapter 2</a></p>
-			<p><a href="#3">Chapter 3</a></p>
-			<p><a href="#4">Chapter 4</a></p>
-		</div>
-
-		<!-- <p><strong>Estimated timesave over 2.080:</strong> 5+ minutes</p> -->
-		<p><strong>Map:</strong> (Click to expand)</p>
-		<a class="map" href="./img/levels/11/map.png"><img src="./img/levels/11/map.png"></img></a>
-		<!-- <p class="caption"><strong>Video of Chapter 11 skip:</strong> (4:58:40)</p>
-		<iframe class="embed" width="560" height="315" src="https://www.youtube.com/embed/-5d6Rqm6AVQ?start=17927" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-
-		<h2 id="1">Chapter 1</h2>
-		<p>Finished by hitting a trigger.</p>
-
-		<h2 id="2">Chapter 2</h2>
-		<p>Finished by hitting a trigger. Earlier chapters must be completed first.</p>
-
-		<h2 id="3">Chapter 3</h2>
-		<p>Finished by killing all enemies from the two dropships.</p>
-
-		<h2 id="4">Chapter 4</h2>
-		<p>Finished by hitting a trigger, which transitions the level. This trigger is always active, so if the player were to reach it they don't need to finish all the previous chapters first.</p>
+<div class="main">
+	<h1>1.1 JUNGLE</h1>
+	<div class="toc">
+		<p><a href="#CCR">Chapter Completion Requirements</a></p>
+		<p><a href="#WAA">Weapons and Ammo</a></p>
+		<p><a href="#ESS">Editor Screenshots</a></p>
+		<p><a href="#SBD">Score Breakdown</a></p>
+		<p><a href="#MAP">Map</a></p>
+		<p><a href="#MPS">Macro Program Snippets</a></p>
 	</div>
 
-
-
-
-
-
-
-
-
-
-	<div class="side">
-		<div class="appendix left">
-			<p><strong>Invisible wall A</strong></p>
-			<p>
-				The wall surrounding the door opened by the physics puzzle is not completely covered by the invisible walls, there is a gap on the right. Note: Foliage has been removed from the screenshot.
-			</p>
-			<img src="./img/levels/11/invisiblewalla.png"></img>
-		</div>
-
-		<div class="appendix left">
-			<p><strong>Invisible wall A alternate look.</strong></p>
-			<p>
-				A separate angle of the invisible wall to the right of the physics puzzle. The wall over the entrance wall to the little area has been removed for the screenshot, it normally is covered pretty tightly.
-			</p>
-			<img src="./img/levels/11/invisiblewallaalternate.png"></img>
-		</div>
-
+	<div id="CCR">
+		<h2>Chapter Completion Requirements</h2>
+		<table>
+			<tr>
+				<th>Ch.</th>
+				<th>Condition</th>
+				<th>Security Timer</th>
+				<th>Requires previous chapter completion?</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>Detector area behind the stone gate.</td>
+				<td>None</td>
+				<td>N/A</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>Detector area underneath overhanging rock formation on the far side of the hill.</td>
+				<td>None</td>
+				<td>Yes</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>Killing all 22 Orc enemies emerging from the dropships.</td>
+				<td>Broken</td>
+				<td>Yes</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>Detector area in the monkey cave.</td>
+				<td>None</td>
+				<td><strong>No</strong></td>
+			</tr>
+		</table>
 	</div>
 
+	<div id="WAA">
+		<h2>Weapons and Ammo</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Weapon \ Chapter</th>
+					<th>1</th>
+					<th>2</th>
+					<th>3</th>
+					<th>4</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="ammoRatioHeader">
+					<th>Ammo Ratio</th>
+					<td>0.25</td>
+					<td>0.1</td>
+					<td>0.1</td>
+					<td>0.1</td>
+				</tr>
+				<tr>
+					<th>Shells</th>
+					<td class="ammoRatio">-</td>
+					<td class="ammoRatio">20</td>
+					<td class="customAmmo">80</td>
+					<td class="customAmmo">80</td>
+				</tr>
+				<tr>
+					<th>Hand Grenades</th>
+					<td class="customAmmo">0</td>
+					<td class="ammoRatio">3</td>
+					<td class="ammoRatio">3</td>
+					<td class="ammoRatio">3</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Added Weapons</h3>
+		<ul>
+			<li>Auto Shotgun on Chapters 2+</li>
+		</ul>
+	</div>
+
+	<div id="ESS">
+		<h2>Editor Screenshots</h2>
+		<h3>Invisible wall A over the puzzle mechanism</h3>
+		<p>
+			The wall surrounding the door opened by the physics puzzle is not completely covered by the invisible walls, there is a gap on the right. 
+			Note: Foliage has been removed for visibility.
+		</p>
+		<img src="./img/levels/11/invisiblewalla.png"></img>
+
+		<h3>Invisible wall A alternate look.</h3>
+		<p>
+			A separate angle of the invisible wall to the right of the physics puzzle. 
+			Foliage has been removed for visibility.
+			The invisible wall over the entry gate on the right has also been removed for visibility, it is normally covered pretty tightly.
+		</p>
+		<img src="./img/levels/11/invisiblewallaalternate.png"></img>
+	</div>
+
+	<div id="SBD">
+		<h2>Score Breakdown</h2>
+		<table>
+			<thead>
+				<tr><th>Points</th><th>Kills</th><th>Source</th></tr>
+			</thead>
+			<tbody>
+				<tr class="chapter"><th>9890</th><th>4</th><th>Chapter 1</th></tr>
+				<tr class="area"><th>1910</th><th>0</th><th>Starting Village</th></tr>
+				<tr><td>400</td><td></td><td>4 Chickens</td></tr>
+				<tr><td>400</td><td></td><td>4 kuvshins containing a coin</td></tr>
+				<tr><td>110</td><td></td><td>3 buildings containing items</td></tr>
+				<tr><td>1000</td><td></td><td>Score at the basketball hoop</td></tr>
+				<tr class="area"><th>6815</th><th>0</th><th>Pond and waterfall</th></tr>
+				<tr><td>15</td><td></td><td>3 crates containing helmets</td></tr>
+				<tr><td>6800</td><td></td><td>Treasure in secret cave</td></tr>
+				<tr class="area"><th>1165</th><th>4</th><th>Mechanism Area</th></tr>
+				<tr><td>40</td><td>4</td><td>4 Orc Soldiers</td></tr>
+				<tr><td>1025</td><td></td><td>6 crates containing items</td></tr>
+				<tr><td>100</td><td></td><td>Autoshotgun</td></tr>
+				
+				<tr class="chapter"><th>9890</th><th>8</th><th>Chapter 2</th></tr>
+				<tr class="area"><th>1100</th><th>0</th><th>Football Field</th></tr>
+				<tr><td>100</td><td></td><td>1 Chicken</td></tr>
+				<tr><td>1000</td><td></td><td>Score at the football pitch</td></tr>
+				<tr class="area"><th>1770</th><th>0</th><th>Hill</th></tr>
+				<tr><td>40</td><td></td><td>4 pills scattered around</td></tr>
+				<tr><td>1000</td><td></td><td>Hidden moneybag in far right corner</td></tr>
+				<tr><td>20</td><td></td><td>4 crates with items</td></tr>
+				<tr><td>710</td><td></td><td>Secret cave loot</td></tr>
+				<tr class="area"><th>250</th><th>8</th><th>Enemies</th></tr>
+				<tr><td>200</td><td>1</td><td>1 Rollerball</td></tr>
+				<tr><td>40</td><td>1</td><td>1 Orc Commander</td></tr>
+				<tr><td>60</td><td>6</td><td>6 Orc Soldiers</td></tr>
+
+				<tr class="chapter"><th>475</th><th>21</th><th>Chapter 3</th></tr>
+				<tr class="area"><th>105</th><th>0</th><th>Items</th></tr>
+				<tr><td>5</td><td></td><td>1 pill in pond (spawned by chapter 2)</td></tr>
+				<tr><td>100</td><td></td><td>Secret rocket launcher</td></tr>
+				<tr class="area"><th>370</th><th>21</th><th>Enemies</th></tr>
+				<tr><td>120</td><td>3</td><td>3 Orc Commanders</td></tr>
+				<tr><td>130</td><td>13</td><td>13 Orc Soldiers</td></tr>
+				<tr><td>120</td><td>6</td><td>6 Orc Destroyers</td></tr>
+				
+				<tr class="chapter"><th>240</th><th>5</th><th>Chapter 4</th></tr>
+				<tr class="area"><th>240</th><th>5</th><th>Enemies</th></tr>
+				<tr><td>200</td><td>1</td><td>1 Barbarian</td></tr>
+				<tr><td>40</td><td>4</td><td>4 Orc Soldiers</td></tr>
+			</tbody>
+			<tfoot>
+				<tr><th>13775</th><th>38</th><th>Total</th></tr>
+			</tfoot>
+		</table>
+		<h3>Potential scoring opportunities</h3>
+		<ul>
+			<li>The 4 aircraft flying by at the start of the level yield 500 points each, if a way can be found to destroy them with the given tools.</li>
+			<li>3 Dropships appear in the level, each worth 100 points. They have 999999 health and some are marked as invulnerable.</li>
+			<li>The neanderthal in the teleporter is worth 100 points, but is marked as invulnerable until destroyed by the scripted sequence.</li>
+			<li>None of these are considered enemies and thus none of them would add to the kill tally.</li>
+		</ul>
+	</div>
+
+	<div id="MAP">
+		<h2>Map</h2>
+		<p><a href="./img/levels/11/map.png">View detailed map (big)</a></p>
+		<ul>
+			<li>Red dot: Pill pickup</li>
+			<li>Yellow dot: Hidden moneybag pickup</li>
+		</ul>
+		<!-- <a class="map" href="./img/levels/11/map.png"><img src="./img/levels/11/mapSmall.png"></img></a> -->
+		<svg width="9887" height="9887" viewBox="0 0 9887 9887" xmlns="http://www.w3.org/2000/svg">
+			<image href="./img/levels/11/mapSmall.png" x="0" y="0" width="9887" height="9887" />
+			<g id="markers">
+				<circle cx="4559" cy="3288" r="64" fill="red"/>
+				<circle cx="4895" cy="3602" r="64" fill="red"/>
+				<circle cx="4737" cy="3894" r="64" fill="red"/>
+				<circle cx="5250" cy="3996" r="64" fill="red"/>
+				<circle cx="4884" cy="5847" r="64" fill="red"/>
+				<circle cx="4034" cy="4035" r="96" fill="yellow"/>
+			</g>
+		</svg>
+	</div>
+
+	<div id="MPS">
+		<h2>Macro Program Snippets</h2>
+		<h3>Chapter 1</h3>
+		<iframe src="./macroProgramSnippets/11_Ch1.txt"></iframe>
+		<h3>Chapter 2</h3>
+		<iframe src="./macroProgramSnippets/11_Ch2.txt"></iframe>
+		<h3>Chapter 3</h3>
+		<iframe src="./macroProgramSnippets/11_Ch3.txt"></iframe>
+		<h3>Chapter 4</h3>
+		<iframe src="./macroProgramSnippets/11_Ch4.txt"></iframe>
+		<h3>Chapter Control</h3>
+		<iframe src="./macroProgramSnippets/11_ChControl.txt"></iframe>
+	</div>
 </div>
+
+
+
+
+
+
+
 
 </body>
 </html>
