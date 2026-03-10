@@ -1,57 +1,60 @@
-[
-  {
-    "id": 1,
-    "name": "",
-    "securityTimer": "",
-    "passCondition": "Detector area behind the stone gate.",
-    "requiresStart": true,
-    "ammoRatio": 0.25,
-    "customAmmo": {
-      "handGrenades": 0
-    },
-    "addedWeapons": {
-    }
-  },
-  {
-    "id": 2,
-    "name": "",
-    "securityTimer": "",
-    "passCondition": "Detector area underneath rock arch.",
-    "requiresStart": true,
-    "ammoRatio": 0.1,
-    "customAmmo": {
-    },
-    "addedWeapons": {
-      "autoShotgun": true
-    }
-  },
-  {
-    "id": 3,
-    "name": "",
-    "securityTimer": "Broken",
-    "passCondition": "Killing all 22 Orc enemies emerging from the dropships.",
-    "requiresStart": true,
-    "ammoRatio": 0.1,
-    "customAmmo": {
-      "shells": 80
-    },
-    "addedWeapons": {
-      "autoShotgun": true
-    }
-  },
-  {
-    "id": 4,
-    "name": "",
-    "securityTimer": "",
-    "passCondition": "Detector area in the monkey cave.",
-    "requiresStart": false,
-    "ammoRatio": 0.1,
-    "customAmmo": {
-      "shells": 80
-    },
-    "addedWeapons": {
-      "autoShotgun": true
-    }
-  },
-  {}
-]
+{
+	"eta": 600,
+	"chapters": [
+		{
+			"id": 1,
+			"name": "",
+			"securityTimer": "",
+			"passCondition": "Detector area behind the stone gate.",
+			"requiresStart": true,
+			"ammoRatio": 0.25,
+			"customAmmo": {
+			"handGrenades": 0
+			},
+			"addedWeapons": {
+			}
+		},
+		{
+			"id": 2,
+			"name": "",
+			"securityTimer": "",
+			"passCondition": "Detector area underneath rock arch.",
+			"requiresStart": true,
+			"ammoRatio": 0.1,
+			"customAmmo": {
+			},
+			"addedWeapons": {
+			"autoShotgun": true
+			}
+		},
+		{
+			"id": 3,
+			"name": "",
+			"securityTimer": "Broken",
+			"passCondition": "Killing all 22 Orc enemies emerging from the dropships.",
+			"requiresStart": true,
+			"ammoRatio": 0.1,
+			"customAmmo": {
+			"shells": 80
+			},
+			"addedWeapons": {
+			"autoShotgun": true
+			}
+		},
+		{
+			"id": 4,
+			"name": "",
+			"securityTimer": "",
+			"passCondition": "Detector area in the monkey cave.",
+			"requiresStart": false,
+			"ammoRatio": 0.1,
+			"customAmmo": {
+			"shells": 80
+			},
+			"addedWeapons": {
+			"autoShotgun": true
+			}
+		},
+		{}
+	]
+}

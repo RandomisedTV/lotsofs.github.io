@@ -19,5 +19,9 @@ function dd($value) {
 }
 
 function urlIs($value) {
-	return $_SERVER['REQUEST_URI'] === $value;
+	return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) === $value;
+}
+
+function urlStartsWith($value) {
+	return str_starts_with($_SERVER['REQUEST_URI'], $value);
 }

@@ -26,3 +26,8 @@ function appendChildToElement(parent, childTag, childTextContent = "") {
 	parent.appendChild(element)
 	return element
 }
+
+function setElementByIdInnerText(id, text) {
+	const element = document.getElementById(id);
+	element.innerText = text;
+}
