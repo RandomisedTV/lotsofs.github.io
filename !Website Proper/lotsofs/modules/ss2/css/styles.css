@@ -7,6 +7,18 @@ div {
 	border: none;
 }
 
+/*
+ * Generic classes
+ */
+
+.bold {
+	font-weight: bold;
+}
+
+.italic {
+	font-style: italic;
+}
+
 /* 
  * HEADER / NAV BAR
  */
@@ -149,13 +161,34 @@ h2 {
 h3 {
 	font-size: 21pt;
 	-webkit-text-stroke: 1px #4C4AEC;
-	margin-top: .5em;
-	margin-bottom: .2em;
+	margin-top: 1em;
+	margin-bottom: 0.3em;
 }
 
 p {
-	margin: 0;
-	margin-bottom: 2em;
+	margin: 0.5em 0;
+}
+
+table {
+	border-collapse: collapse;
+	margin-top: 1em;
+}
+
+th, td {
+	border: 1px solid #4C4AEC;
+	padding: 5px;
+}
+
+thead th {
+	background-color: #000000bf;
+}
+
+tbody th, td {
+	background-color: #0000002f;
+}
+
+#psl h3 {
+	margin-top: 0.5em;
 }
 
 #psl p {
@@ -164,6 +197,12 @@ p {
 	border: solid 1px #067095;
 	padding: .5em 1em .7em;
 	margin-top: .8em;
+	margin-bottom: 2em;
+}
+
+#waa_tr_ratio td,
+#waa_tr_ratio th {
+	background-color: #0000007f;
 }
 
 /* 

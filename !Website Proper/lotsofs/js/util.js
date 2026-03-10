@@ -10,10 +10,22 @@ function escapeHtml(text) {
     return text.replace(/[&<>"']/g, char => HTML_ESCAPE_MAP[char]);
 }
 
-async function readJsonAsync(path) {
-    const response = await fetch(path);
-    if (!response.ok) throw new Error("Failed to load file " + path);
+async function readJsonFileAsync(path) {
+    const response = await fetchFileAsync(path);
     return await response.json();
+}
+
+async function readTextFileAsync(path) {
+    const response = await fetchFileAsync(path);
+    return await response.text();
+}
+
+async function fetchFileAsync(path) {
+    const response = await fetch(path);
+    if (!response.ok) {
+        throw new Error(`Error loading file: ${path}, status: ${response.status}`);
+    }
+    return response;
 }
 
 // ---------------- --

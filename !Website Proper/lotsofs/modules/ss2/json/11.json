@@ -3,13 +3,13 @@
 	"chapters": [
 		{
 			"id": 1,
-			"name": "",
-			"securityTimer": "",
+			"securityTimer": "None",
 			"passCondition": "Detector area behind the stone gate.",
 			"requiresStart": true,
 			"ammoRatio": 0.25,
 			"customAmmo": {
-			"handGrenades": 0
+			  "handGrenades": 0,
+        "shells": -1
 			},
 			"addedWeapons": {
 			}
@@ -17,14 +17,14 @@
 		{
 			"id": 2,
 			"name": "",
-			"securityTimer": "",
+			"securityTimer": "None",
 			"passCondition": "Detector area underneath rock arch.",
 			"requiresStart": true,
 			"ammoRatio": 0.1,
 			"customAmmo": {
 			},
 			"addedWeapons": {
-			"autoShotgun": true
+			  "autoShotgun": true
 			}
 		},
 		{
@@ -35,26 +35,169 @@
 			"requiresStart": true,
 			"ammoRatio": 0.1,
 			"customAmmo": {
-			"shells": 80
+			  "shells": 80
 			},
 			"addedWeapons": {
-			"autoShotgun": true
+			  "autoShotgun": true
 			}
 		},
 		{
 			"id": 4,
 			"name": "",
-			"securityTimer": "",
+			"securityTimer": "None",
 			"passCondition": "Detector area in the monkey cave.",
 			"requiresStart": false,
 			"ammoRatio": 0.1,
 			"customAmmo": {
-			"shells": 80
+			  "shells": 80
 			},
 			"addedWeapons": {
-			"autoShotgun": true
+			  "autoShotgun": true
 			}
 		},
 		{}
-	]
+	],
+  "points": [
+    { 
+      "type": "enemy",
+      "name": "Chicken",
+      "count": 4,
+      "worth": 100,
+      "countsAsKill": false,
+      "chapter": 1,
+      "area": "Starting Village",
+      "subarea": ""
+    },
+    { 
+      "type": "pickup",
+      "name": "Coin",
+      "count": 4,
+      "worth": 100,
+      "countsAsKill": false,
+      "chapter": 1,
+      "area": "Starting Village",
+      "subarea": "Inside a vase"
+    },
+    { 
+      "type": "pickup",
+      "name": "Treasure Coin",
+      "count": 1,
+      "worth": 100,
+      "countsAsKill": false,
+      "chapter": 1,
+      "area": "Starting Village",
+      "subarea": "Inside a hut"
+    },
+    { 
+      "type": "pickup",
+      "name": "Hand Grenades",
+      "count": 1,
+      "worth": 5,
+      "countsAsKill": false,
+      "chapter": 1,
+      "area": "Starting Village",
+      "subarea": "Inside a hut"
+    },
+    { 
+      "type": "pickup",
+      "name": "Treasure Bag",
+      "count": 1,
+      "worth": 1000,
+      "countsAsKill": false,
+      "chapter": 1,
+      "area": "Starting Village",
+      "subarea": "Score at the basketball hoop"
+    },
+    { 
+      "type": "pickup",
+      "name": "Treasure Bag",
+      "count": 1,
+      "worth": 1000,
+      "countsAsKill": false,
+      "chapter": 1,
+      "area": "Pond and Waterfall",
+      "subarea": "Secret cave"
+    },
+    { 
+      "type": "pickup",
+      "name": "Treasure Chest",
+      "count": 1,
+      "worth": 5000,
+      "countsAsKill": false,
+      "chapter": 1,
+      "area": "Pond and Waterfall",
+      "subarea": "Secret cave"
+    },
+    { 
+      "type": "pickup",
+      "name": "Treasure Coin",
+      "count": 8,
+      "worth": 100,
+      "countsAsKill": false,
+      "chapter": 1,
+      "area": "Pond and Waterfall",
+      "subarea": "Secret cave"
+    },
+    { 
+      "type": "pickup",
+      "name": "Helmet",
+      "count": 3,
+      "worth": 5,
+      "countsAsKill": false,
+      "chapter": 1,
+      "area": "Pond and Waterfall",
+      "subarea": "Inside a crate"
+    },
+    { 
+      "type": "enemy",
+      "name": "Orc Soldier",
+      "count": 4,
+      "worth": 10,
+      "countsAsKill": true,
+      "chapter": 1,
+      "area": "Narrow canyon",
+      "subarea": ""
+    },
+    { 
+      "type": "pickup",
+      "name": "Treasure Bag",
+      "count": 1,
+      "worth": 1000,
+      "countsAsKill": false,
+      "chapter": 1,
+      "area": "Narrow canyon",
+      "subarea": "Inside a crate"
+    },
+    { 
+      "type": "pickup",
+      "name": "Shells",
+      "count": 3,
+      "worth": 5,
+      "countsAsKill": false,
+      "chapter": 1,
+      "area": "Narrow canyon",
+      "subarea": "Inside a crate"
+    },
+    { 
+      "type": "pickup",
+      "name": "Helmet",
+      "count": 2,
+      "worth": 5,
+      "countsAsKill": false,
+      "chapter": 1,
+      "area": "Narrow canyon",
+      "subarea": "Inside a crate"
+    },
+    { 
+      "type": "pickup",
+      "name": "Autoshotgun",
+      "count": 1,
+      "worth": 100,
+      "countsAsKill": false,
+      "chapter": 1,
+      "area": "Narrow canyon",
+      "subarea": ""
+    },
+    {}
+  ]
 }

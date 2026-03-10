@@ -6,19 +6,44 @@
 	<h2 id="mapName">MAP NAME</h2>
 	<div id="psl">
 		<h3>Plot, Story, Lore</h3>
-		<p>Welcome to M'Digbo, Sam! <br>
-Considering what the Wizards said, I think we should find the M'keke Village and ask their Chief about the medallion. <br>
-There may be obstacles blocking your path. This can be dealt with by the use of objects. To pick up, or use a specific object, press the Use button. <br>
-My sensors detect that the village is on the other side of the mountain. A monkey's head marks the cave entrance, that should take you to the other side. <br>
-Search this settlement in front of us, maybe you can find some useful stuff.</p>
+		<p id="psl_p">Level .dsc file blurb</p>
 	</div>
-	<div>
+	<div id="ccr">
 		<h3>Chapter Completion Requirements</h3>
-		<p>Text</p>
+		<table id="ccr_table">
+			<thead>
+				<tr>
+					<th>Ch.</th>
+					<th>Official Description</th>
+					<th>Completion Condition</th>
+					<th>Security Timer</th>
+					<th>Requires previous chapter completion?</th>
+				</tr>
+			</thead>
+			<tbody id="ccr_tbody">
+				<!-- Populated by script -->
+			</tbody>
+		</table>
 	</div>
-	<div>
+	<div id="waa">
 		<h3>Weapons and Ammo</h3>
-		<p>Text</p>
+		<table id="waa_table">
+			<thead>
+				<tr id="waa_tr_head">
+					<th>Weapon \ Chapter</th>
+					<!-- Populated by script -->
+				</tr>
+			</thead>
+			<tbody id="waa_tbody">
+				<tr id="waa_tr_ratio">
+					<th>Ammo Ratio</th>
+				</tr>
+				<!-- Populated by script -->
+			</tbody>
+		</table>
+		<p>Bold cells: Ammo is set by a fixed value for this chapter.</p>
+		<p>Italic cells: Ammo is determined by the generic ammo ratio value of this chapter.</p>
+		<p>Dashes: Impossible to get this ammo type at this point in the game.</p>
 	</div>
 	<div>
 		<h3>Editor Screenshots</h3>
@@ -38,22 +63,10 @@ Search this settlement in front of us, maybe you can find some useful stuff.</p>
 	</div>
 </div>
 
-<table>
-    
-</table>
-
-<script>
-    const levelId = <?= $levelId ?>;
-	const levelName = "<?= $levelName ?>";
-    
-    async function loadLevel() {
-        let levelData = await readJsonAsync(`/modules/ss2/json/${levelId}.json`);
-        console.log(levelData);
-
-		setElementByIdInnerText("mapName",levelName)
-    }
-
-    loadLevel();
-</script>
+<div id="levelInfo"
+	data-id="<?= $levelId ?>"
+	data-name="<?= $levelName ?>"
+></div>
+<script src="/modules/ss2/js/level.js"></script>
 
 <?php require(__MODULES__ . '/ss2/views/partials/foot.php') ?>
