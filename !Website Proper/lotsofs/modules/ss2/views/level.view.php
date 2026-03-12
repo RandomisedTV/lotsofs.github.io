@@ -37,6 +37,7 @@
 			<tbody id="waa_tbody">
 				<tr id="waa_tr_ratio">
 					<th>Ammo Ratio</th>
+					<!-- Populated by script -->
 				</tr>
 				<!-- Populated by script -->
 			</tbody>
@@ -45,21 +46,63 @@
 		<p>Italic cells: Ammo is determined by the generic ammo ratio value of this chapter.</p>
 		<p>Dashes: Impossible to get this ammo type at this point in the game.</p>
 	</div>
-	<div>
+	<div id="sat">
+		<h3>Spawners & Timings</h3>
+		<div id="satdiv">
+			<!-- Populated by script -->
+		</div>
+	</div>
+	<div id="ess">
 		<h3>Editor Screenshots</h3>
-		<p>Text</p>
+		<div id="essdiv">
+			<!-- Populated by script -->
+		</div>
 	</div>
-	<div>
+	<div id="sbd">
 		<h3>Score Breakdown</h3>
-		<p>Text</p>
+		<p class="sbd_multiplierText">
+			Enemy Multiplier: 
+			<button class="sbd_button" onclick="changeSBDValue(-1)">◀</button>
+			<span id="sbd_multiplierSpan">NONE</span>
+			<button class="sbd_button" onclick="changeSBDValue(1)">▶</button>
+		</p>
+		<table id="sbd_table">
+			<thead>
+				<tr>
+					<th colspan=4>Source</th>
+					<th colspan=1>Kills</th>
+					<th colspan=3>Score</th>
+				</tr>
+				<tr>
+					<th>Ch.</th>
+					<th>Area</th>
+					<th>Count</th>
+					<th>Type</th>
+					<th>Cum. Kills</th>
+					<th>Worth</th>
+					<th>Total Worth</th>
+					<th>Cum. Score</th>
+				</tr>
+			</thead>
+			<tbody id="sbd_tbody">
+				<!-- Populated by script -->
+			</tbody>
+		</table>
 	</div>
-	<div>
+	<div id="map">
 		<h3>Map</h3>
-		<p>Text</p>
+		<div id="mapSvgContainer">
+			<div id="mapTooltip">
+				Sample Text
+			</div>
+			<!-- Populated by script -->
+		</div>
 	</div>
-	<div>
+	<div id="mps">
 		<h3>Macro Program Snippets</h3>
-		<p>Text</p>
+		<div id="mpsdiv">
+			<!-- Populated by script -->
+		</div>
 	</div>
 </div>
 

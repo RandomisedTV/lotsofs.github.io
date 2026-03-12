@@ -1,6 +1,10 @@
 body {
 	margin: 0;
-	background-color: #081724;
+	background-color: #0A0D2D;
+	background-image: url("/modules/ss2/img/Background_Blue_PC.png");
+	background-attachment: fixed;
+	/* background-repeat: no-repeat; */
+	background-size: 100vw auto;
 }
 
 div {
@@ -142,9 +146,13 @@ div.subnavbox nav a {
  */
 
 div.mainBody {
-	margin-left: 1em;
+	background-color: #081724;
 	font-family: 'Verdana', sans-serif;
 	color: #CACDFF;
+	max-width: 1200px;
+	margin: 0 auto;
+	border: solid 1px #4C4AEC;
+	padding: 1em;
 }
 
 h2, h3 {
@@ -163,6 +171,12 @@ h3 {
 	-webkit-text-stroke: 1px #4C4AEC;
 	margin-top: 1em;
 	margin-bottom: 0.3em;
+}
+
+h4 {
+	font-size: 14pt;
+	-webkit-text-stroke: 1px #4C4AEC;
+	margin: 1em 0 0;
 }
 
 p {
@@ -203,6 +217,84 @@ tbody th, td {
 #waa_tr_ratio td,
 #waa_tr_ratio th {
 	background-color: #0000007f;
+}
+
+#essdiv img {
+	max-height: 40vh;
+	border: 2px solid #4C4AEC;
+	margin: 0 auto;
+	display: block;
+}
+
+#sbd_table {
+	border-collapse: separate;
+	border-spacing: 0;
+	border-bottom: solid 1px #4C4AEC;
+	border-left: solid 1px #4C4AEC;
+}
+
+#sbd_table td,
+#sbd_table th {
+	border-bottom: none;
+	border-left: none;
+}
+
+#sbd_table .sbd_nextarea td {
+	border-top: solid 4px #4C4AEC;
+}
+
+#sbd_table .sbd_firstOfChapter td {
+	border-top: double 10px #4C4AEC;
+}
+
+.sbd_button,
+.sbd_multiplierText {
+	font-family: 'ZurichUltraBlackExtended', sans-serif;
+	font-size: 12pt;
+	background-color: transparent;
+	border: none;
+	margin-bottom: -0.8em;
+}
+
+.sbd_button {
+	color: #CACDFF;
+	-webkit-text-stroke: 0;
+}
+
+.sbd_button:hover {
+	color: #ECECEC;
+}
+
+.sbd_multiplierText {
+	color: #ECECEC;
+	-webkit-text-stroke: 1px #4C4AEC;
+}
+
+#sbd_multiplierSpan {
+	display: inline-block;
+	width: 4em;
+	text-align: center;
+}
+
+#mapSvgContainer svg {
+	border: 1px solid #4C4AEC;
+	background-color: #0000002f;
+}
+
+#mapTooltip {
+	position: absolute;
+	visibility: hidden;
+	background-color: #067095;
+	border: solid 1px #023951;
+	padding: .1em;
+}
+
+code {
+	border: 1px solid #4C4AEC;
+	display: block;
+	padding: .5em;
+	background-color: #0000007f;
+	margin-top: -0.6em;
 }
 
 /* 
