@@ -237,6 +237,15 @@ tbody th, td {
 	color: red;
 }
 
+#sat .fatterTopBorder td,
+#sat .fatterTopBorder th {
+	border-top: solid 4px #4C4AEC;
+}
+
+#sat #templateTable {
+	display: none;
+}
+
 #essdiv img {
 	max-height: 40vh;
 	border: 2px solid #4C4AEC;

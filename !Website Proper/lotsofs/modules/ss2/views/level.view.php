@@ -50,6 +50,27 @@
 		<h3>Spawners & Timings</h3>
 		<div id="satdiv">
 			<!-- Populated by script -->
+			 <table id="templateTable">
+				<thead>
+					<tr>
+						<td colspan="2" data-field="unitType"></id>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="fatterTopBorder"><th>Spawn type</th><td data-field="spawnType"></td></tr>
+					<tr><th>Spawn effect configuration</th><td data-field="spawnEffectConfiguration"></td></tr>
+					<tr><th>Launcher</th><td data-field="launcher"></td></tr>
+					<tr><th>Spawn Formation</th><td data-field="spawnFormation"></td></tr>
+					<tr class="fatterTopBorder"><th>Total number</th><td data-field="totalNumber"></td></tr>
+					<tr><th>Number in group</th><td data-field="numberInGroup"></td></tr>
+					<tr><th>Initial delay</th><td data-field="initialDelay"></td></tr>
+					<tr><th>Initial delay from script</th><td data-field="initialDelayFromScript"></td></tr>
+					<tr><th>Single delay</th><td data-field="singleDelay"></td></tr>
+					<tr><th>Group delay</th><td data-field="groupDelay"></td></tr>
+					<tr><th>Spawnee death delay</th><td data-field="spawneeDeathDelay"></td></tr>
+					<tr class="fatterTopBorder"><th>Total spawntime</th><td data-field="totalSpawntime"></td></tr>
+				</tbody>
+			 </table>
 		</div>
 	</div>
 	<div id="ess">
