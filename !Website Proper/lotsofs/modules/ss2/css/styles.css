@@ -230,7 +230,7 @@ tbody th, td {
 	overflow-y: hidden;
 	width: 96%;
 	max-width: 70vw;
-	scrollbar-color: #CACDFFBF #4C4AEC;
+	scrollbar-color: #CACDFF #4C4AEC;
 }
 
 #sat .svgContainer::-webkit-scrollbar {
