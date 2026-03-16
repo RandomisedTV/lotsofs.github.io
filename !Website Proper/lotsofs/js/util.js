@@ -6,6 +6,8 @@ const HTML_ESCAPE_MAP = {
     '"': "&apos;",
 };
 
+const SVG_NS = "http://www.w3.org/2000/svg";
+
 function escapeHtml(text) {
     return text.replace(/[&<>"']/g, char => HTML_ESCAPE_MAP[char]);
 }
@@ -42,4 +44,8 @@ function appendChildToElement(parent, childTag, childTextContent = "") {
 function setElementByIdInnerText(id, text) {
 	const element = document.getElementById(id);
 	element.innerText = text;
+}
+
+function createSVGElement(tag) {
+	return document.createElementNS(SVG_NS, tag);
 }

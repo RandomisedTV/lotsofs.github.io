@@ -59,7 +59,7 @@ const scoreInformation = {
 	"Treasure Coin": 100,
 }
 
-const tooltip = document.getElementById("mapTooltip");
+const tooltip = document.getElementById("popupToolTip");
 
 let cumulativeLevelScore = 0;
 let cumulativeLevelKills = 0;
@@ -87,7 +87,6 @@ async function setLevelDsc() {
 	}
 }
 
-
 async function setLevelData() {
 	try {
 		jsonData = await readJsonFileAsync(`/modules/ss2/json/${levelId}.json`);
@@ -109,6 +108,22 @@ async function setLevelData() {
 	catch (err) {
 		console.log(err);
 	}
+}
+
+function showTooltipPopup(text) {
+	tooltip.textContent = text;
+	tooltip.style.visibility = "visible";
+}
+
+function moveTooltipPopup(e) {
+	tooltip.style.left = `${e.clientX + window.scrollX + 30}px`;
+	tooltip.style.top = `${e.clientY + window.scrollY + 10}px`;
+}
+
+function hideTooltipPopup() {
+	tooltip.style.visibility = "hidden";
+	tooltip.style.left = `0`;
+	tooltip.style.top = `0`;
 }
 
 /* Chapter Completion Requirements */
@@ -179,62 +194,121 @@ function populateWAATable() {
 
 function populateSATSection() {
 	const div = document.getElementById("satdiv");
-	levelData.spawners.forEach((s, i) => {
-		appendChildToElement(div, "h4", s.name);
+	levelData.spawnerGroups.forEach((spawnerGroup, _) => {
+		appendChildToElement(div, "h4", spawnerGroup.groupName);
 		
-		let spawnees = [];
-		for (let i = 0; i < totalNumber; i++) {
-			
-		}
-		// appendChildToElement(div, "p", img.description);
-		// const imgElement = appendChildToElement(div, "img", "");
-		// imgElement.src = `/modules/ss2/img/levels/${levelId}/${img.fileName}`;
+		const pinWidth = 150;
+
+		let svgWidth = 0;
+		let svgHeight = 0;
+		
+		const svg = createSVGElement("svg");
+		
+		const g = createSVGElement("g");
+		g.setAttribute("id", "markers");
+		svg.appendChild(g);
+
+		let spawners = spawnerGroup.spawners;
+
+		spawners.forEach((s, spawnerIdx) => {
+			appendChildToElement(div, "h4", s.name);
+			let spawnees = [];
+			let elapsedTime = 0;
+			for (let i = 0; i < s.totalNumber; i++) {
+				let spawnee = generateSATSpawneeData(s, elapsedTime, i);
+				elapsedTime = spawnee.effect;
+				spawnees.push(spawnee);
+
+				const pin = generateSATSVGTimelinePin(spawnee, s, pinWidth, spawnerIdx);
+				g.appendChild(pin);
+			}
+			svgWidth = Math.max(svgWidth, elapsedTime*1000 + pinWidth);
+			svgHeight = spawnerIdx * 100 + 100;
+		})
+		svg.setAttribute("width", svgWidth / 10);
+		svg.setAttribute("height", "100%");
+		svg.setAttribute("preserveAspectRatio", "none");
+		svg.setAttribute("viewBox", `0 0 ${svgWidth} ${svgHeight}`);
+		svg.setAttribute("xmlns", SVG_NS);
+		
+		generateSATSVGTimelineBackdrop(svg, svgWidth, svgHeight, pinWidth);
+		
+		const svgContainerDiv = appendChildToElement(div, "div", "");
+		svgContainerDiv.classList.add("svgContainer");
+		svgContainerDiv.appendChild(svg);
 	})
 }
-	// // Notes to self: Remove this later
-	// let spawnees = [];
 
-	// let spawnType = "maintaingroup" // Other options: "simple", "one", more?
-	// let spawnEffectDuration = 0.9; // Must wait for this
-	// let spawnLaunchDuration = 0; // Can be interrupted and finished early with certain tricks (= negative timeToKill)
-
-	// let totalNumber = 51; // Multiplied by multiplier
-	// let numberInGroup = 6; // Is this multiplied by the multiplier as well?
-	// let initialDelay = 2;
-	// let singleDelay = 1.65;
-	// let groupDelay = 1;	// Won't do anything if it's smaller than singleDelay. The game picks the smallest of these two for 1st spawn of subsequent groups
-	// let spawneeDeathDelay = 0; // Haven't tested how this works and cooperates with singleDelay & groupDelay
-
-	// let timeToKill = 0; // Variable, depends on player skill/swarmedness
-	// let bugged = true; // Old version 1.90
-
-	// let totalSpawnTime = 0;
-
-	// for (let i = 0; i < totalNumber; i++) {
-	// 	let spawnee = {};
-	// 	let spawneeSpawnTime = 0;
-	// 	if (i == 0) {
-	// 		totalSpawnTime += initialDelay;
-	// 	}
-	// 	else if (bugged && i < numberInGroup) { // bugged only applies if the spawn type = maintaingroup (it ignores singleDelay for the first group only)
-	// 		totalSpawnTime += groupDelay;
-	// 	}
-	// 	else if (i % numberInGroup == 0) {
-	// 		let theoreticalSpawnTime = Math.max(singleDelay, groupDelay);
-	// 		// Check the spawnEffectDuration + spawnLaunchDuration + spawneeDeathDelay + timeToKill for the numberInGroup'th enemy spawned before this one.
-	// 		// If it is greater than theoreticalSpawnTime, this enemy won't spawn just yet...
-	// 		// Test how this works.
-	// 		totalSpawnTime += Math.max(singleDelay, groupDelay);
-	// 	}
-	// 	else {
-	// 		totalSpawnTime += singleDelay;
-	// 	}
-	// 	if (i == totalNumber - 1) {
-	// 		totalSpawnTime += spawnEffectDuration;
-	// 		totalSpawnTime += spawnLaunchDuration;
-	// 	}
-	// 	console.log(i + ": " + totalSpawnTime);
+function generateSATSpawneeData(s, elapsedTime, i) {
+	let spawnee = {
+		effect: 0,
+		egg: 0,
+		puppet: 0,
+		death: 0
+	};
+	if (i == 0) {
+		elapsedTime += s.initialDelay + s.initialDelayByScript;
+	}
+	// else if (bugged && i < numberInGroup) {
+	// 	// TODO: bugged only applies if the spawn type = maintaingroup (it ignores singleDelay for the first group only)
+	// 	elapsedTime += s.groupDelay;
 	// }
+	else if (i % s.numberInGroup == 0) {
+		// groupDelay won't do anything if it's smaller than singleDelay. The game picks the smallest of these two for 1st spawn of subsequent groups
+		let spawnTime = Math.max(s.singleDelay, s.groupDelay);
+		// TODO:
+		// Check the spawnEffectDuration + spawnLaunchDuration + spawneeDeathDelay + timeToKill for the numberInGroup'th enemy spawned before this one.
+		// If it is greater than theoreticalSpawnTime, this enemy won't spawn just yet... (in case of maintaingroup)
+		// Test how this works.
+		elapsedTime += Math.max(spawnTime);
+	}
+	else {
+		elapsedTime += s.singleDelay;
+	}
+	spawnee.effect = elapsedTime;
+	spawnee.egg = spawnee.effect + s.spawnEffectDelay;
+	spawnee.puppet = spawnee.egg + s.spawnLaunchDuration;
+	spawnee.death = spawnee.puppet + s.timeToKill;
+	return spawnee;
+}
+
+function generateSATSVGTimelinePin(spawnee, s, pinWidth, spawnerIdx) {
+	let tooltipText = `${spawnee.puppet}s: ${s.name}`;
+
+	const pin = createSVGElement("rect");
+	pin.setAttribute("x", spawnee.puppet * 1000);
+	pin.setAttribute("width", pinWidth);
+	pin.setAttribute("y", spawnerIdx * 100);
+	pin.setAttribute("height", 100);
+	pin.setAttribute("fill", s.color);
+	pin.addEventListener("mouseenter", e => {
+		pin.setAttribute("fill", "#ffffff");
+		showTooltipPopup(tooltipText);
+	});
+	pin.addEventListener("mouseleave", e => {
+		pin.setAttribute("fill", s.color);
+		hideTooltipPopup();
+	});
+	pin.addEventListener("mousemove", moveTooltipPopup);
+	return pin;
+}
+
+function generateSATSVGTimelineBackdrop(svg, svgWidth, svgHeight, pinWidth) {
+	for (let i = pinWidth * 0.5; i < svgWidth; i+=1000) {
+		const timeline = createSVGElement("rect");
+		timeline.setAttribute("x", i);
+		if (i + 1000 > svgWidth) {
+			timeline.setAttribute("width", svgWidth % 1000 - pinWidth);	
+		}
+		else {
+			timeline.setAttribute("width", 1000); 
+		}
+		timeline.setAttribute("y", 0);
+		timeline.setAttribute("height", svgHeight);
+		timeline.setAttribute("fill", i % 2000 < 1000 ? "#067095" : "#023951");
+		svg.insertBefore(timeline, svg.firstChild);
+	}
+}
 
 /* Editor Screenshots */
 
@@ -272,14 +346,17 @@ function addSBDSection(chapter, i) {
 			itemCount++;
 			
 			let multiplier = item.countsAsKill ? enemyMultiplier : 1;
-			
+			if (item.maxMultiplier) {
+				multiplier = Math.min(multiplier, item.maxMultiplier);
+			}
+
 			let name = item.name;
 			if (item.note) {
 				name += ` (${item.note.toLowerCase()})`;
 			}
 			
 			const worth = item.worth ?? scoreInformation[item.name] ?? "????";
-			const count = (item.count ?? 1) * multiplier;
+			count = (item.count ?? 1) * multiplier;
 			const countsAsKill = item.countsAsKill ?? false;
 			
 			const totalWorth = worth * count;
@@ -323,20 +400,19 @@ function changeSBDValue(change) {
 /* Map */
 
 function generateMAPSvg() {
-	const svgNS = "http://www.w3.org/2000/svg";
 	const imageHref = `/modules/ss2/img/maps/${levelId}.png`;
 	const width = levelData.map.width;
 	const height = levelData.map.height;
 
 	const markers = levelData.map.markers;
 
-	const svg = document.createElementNS(svgNS, "svg");
+	const svg = createSVGElement("svg");
 	svg.setAttribute("width", width);
 	svg.setAttribute("height", height);
 	svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-	svg.setAttribute("xmlns", svgNS);
+	svg.setAttribute("xmlns", SVG_NS);
 	
-	const image = document.createElementNS(svgNS, "image");
+	const image = createSVGElement("image");
 	image.setAttribute("href", imageHref);
 	image.setAttribute("x", 0);
 	image.setAttribute("y", 0);
@@ -344,10 +420,10 @@ function generateMAPSvg() {
 	image.setAttribute("height", height);
 	svg.appendChild(image);
 
-	const g = document.createElementNS(svgNS, "g");
+	const g = createSVGElement("g");
 	g.setAttribute("id", "markers");
 	markers.forEach(m => {
-		const circle = document.createElementNS(svgNS, "circle");
+		const circle = createSVGElement("circle");
 		circle.setAttribute("cx", m.x);
 		circle.setAttribute("cy", m.y);
 		circle.setAttribute("r", m.r);
@@ -355,17 +431,15 @@ function generateMAPSvg() {
 		circle.setAttribute("stroke", "#000000");
 
 		circle.addEventListener("mouseenter", e => {
-			tooltip.textContent = m.tooltip;
-			tooltip.style.visibility = "visible";
+			circle.setAttribute("fill", "#ffffff");
+			showTooltipPopup(m.tooltip);
 		});
 		circle.addEventListener("mouseleave", e => {
-			tooltip.style.visibility = "hidden";
+			circle.setAttribute("fill", m.color);
+			hideTooltipPopup();
 		});
-		circle.addEventListener("mousemove", e => {
-			const rect = svg.getBoundingClientRect();
-			tooltip.style.left = `${e.clientX + window.scrollX + 30}px`;
-			tooltip.style.top = `${e.clientY + window.scrollY + 10}px`;
-		});
+		circle.addEventListener("mousemove", moveTooltipPopup);
+
 		g.appendChild(circle);
 	})
 	svg.appendChild(g);

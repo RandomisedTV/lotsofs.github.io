@@ -3,7 +3,7 @@
 	"chapters": [
 		{
 			"id": 1,
-			"securityTimer": "None",
+			"securityTimer": "60 seconds after picking up the Auto shotgun to open the door automatically",
 			"passCondition": "Detector area behind the stone gate.",
 			"requiresStart": true,
 			"ammoRatio": 0.25,
@@ -185,7 +185,8 @@
 					{ 
 						"name": "Rollerball",
 						"count": 1,
-						"countsAsKill": true
+						"countsAsKill": true,
+						"maxMultiplier": 8
 					},
 					{ 
 						"name": "Orc Commander",
@@ -223,7 +224,7 @@
 		{
 			"id": 3,
 			"name": "",
-			"securityTimer": "Broken",
+			"securityTimer": "45 sec after first spawn to enable a detector area",
 			"passCondition": "Killing all 22 Orc enemies emerging from the dropships.",
 			"requiresStart": true,
 			"ammoRatio": 0.1,
@@ -252,24 +253,48 @@
 						"note": "In water, spawned by Ch. 2"
 					}
 				],
-				"Enemies": [
+				"Left Dropship": [
 					{ 
 						"name": "Orc Commander",
-						"count": 3,
+						"count": 1,
 						"countsAsKill": true,
-						"note": ""
+						"note": "",
+						"maxMultiplier": 1
 					},
 					{ 
 						"name": "Orc Grunt",
-						"count": 13,
+						"count": 6,
 						"countsAsKill": true,
 						"note": ""
 					},
 					{ 
 						"name": "Orc Destroyer",
-						"count": 6,
+						"count": 3,
 						"countsAsKill": true,
 						"note": ""
+					}
+				],
+				"Right Dropship": [
+					{ 
+						"name": "Orc Commander",
+						"count": 2,
+						"countsAsKill": true,
+						"note": "",
+						"maxMultiplier": 10
+					},
+					{ 
+						"name": "Orc Grunt",
+						"count": 7,
+						"countsAsKill": true,
+						"note": "",
+						"maxMultiplier": 10
+					},
+					{ 
+						"name": "Orc Destroyer",
+						"count": 3,
+						"countsAsKill": true,
+						"note": "",
+						"maxMultiplier": 10
 					}
 				]
 			}
@@ -301,7 +326,8 @@
 						"name": "Barbarian",
 						"count": 1,
 						"countsAsKill": true,
-						"note": ""
+						"note": "",
+						"maxMultiplier": 10
 					},
 					{ 
 						"name": "Orc Grunt",
@@ -314,19 +340,56 @@
 		},
 		{}
 	],
-	"spawners": [
+	"spawnerGroups": [
 		{
-			"name": "Chapter 4 accompanying orc soldiers",
-			"spawnType": "simple",
-			"spawnEffectDelay": 0,
-			"spawnLaunchDuration": 0,
-			"totalNumber": 12,
-			"numberInGroup": 4,
-			"initialDelay": 0,
-			"singleDelay": 0.5,
-			"groupDelay": 1,
-			"spawneeDeathDelay": 0,
-			"timeToKill": 0
+			"groupName": "Chapter 3 dropships",
+			"spawners": [
+				{
+					"name": "Left Dropship First Commander",
+					"color": "#00ff00",
+					"spawnType": "simple",
+					"spawnEffectDelay": 0,
+					"spawnLaunchDuration": 0,
+					"totalNumber": 1,
+					"numberInGroup": 1,
+					"initialDelay": 0,
+					"singleDelay": 0,
+					"groupDelay": 1,
+					"spawneeDeathDelay": 0,
+					"timeToKill": 0,
+					"initialDelayByScript": 0
+				},
+				{
+					"name": "Left Dropship Multispawner",
+					"color": "#00ff00",
+					"spawnType": "simple",
+					"spawnEffectDelay": 0,
+					"spawnLaunchDuration": 0,
+					"totalNumber": 9,
+					"numberInGroup": 3,
+					"initialDelay": 0,
+					"singleDelay": 0.5,
+					"groupDelay": 1,
+					"spawneeDeathDelay": 0,
+					"timeToKill": 0,
+					"initialDelayByScript": 1
+				},
+				{
+					"name": "Right Dropship Multispawner",
+					"color": "#ff0000",
+					"spawnType": "simple",
+					"spawnEffectDelay": 0,
+					"spawnLaunchDuration": 0,
+					"totalNumber": 12,
+					"numberInGroup": 4,
+					"initialDelay": 0,
+					"singleDelay": 0.5,
+					"groupDelay": 1,
+					"spawneeDeathDelay": 0,
+					"timeToKill": 0,
+					"initialDelayByScript": 8
+				}
+			]
 		}
 	],
 	"imagery": [
@@ -339,6 +402,11 @@
 			"fileName": "invisiblewallb.png",
 			"title": "Invisible wall over the puzzle door (alternate look)",
 			"description": "A separate angle of the invisible wall to the right of the physics puzzle. Foliage has been removed for visibility. The invisible wall over the entry gate on the right has also been removed for visibility, it is normally covered pretty tightly."
+		},
+		{
+			"fileName": "ch3securitydetector.png",
+			"title": "Security detector area to end chapter 3",
+			"description": "Enabled after enemies remain unkilled for 45 seconds, this trigger can be hit to end chapter 3. Note: Trees have been removed for visibility."
 		}
 	],
 	"map": {
@@ -359,6 +427,7 @@
 	},
 	"macros": [
 		{ "title": "Chapter 1", "fileName": "Macro001" },
+		{ "title": "Pressure Plate Puzzle", "fileName": "Simple" },
 		{ "title": "Chapter 2", "fileName": "Chapter002_Fights" },
 		{ "title": "Chapter 3", "fileName": "Macro003" },
 		{ "title": "Chapter 4", "fileName": "Macro004" },

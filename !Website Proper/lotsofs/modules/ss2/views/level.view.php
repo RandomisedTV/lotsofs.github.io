@@ -60,11 +60,14 @@
 	</div>
 	<div id="sbd">
 		<h3>Score Breakdown</h3>
-		<p class="sbd_multiplierText">
-			Enemy Multiplier: 
-			<button class="sbd_button" onclick="changeSBDValue(-1)">◀</button>
-			<span id="sbd_multiplierSpan">NONE</span>
-			<button class="sbd_button" onclick="changeSBDValue(1)">▶</button>
+		<p>
+			<span class="sbd_multiplierText">
+				Enemy Multiplier: 
+				<button class="sbd_button" onclick="changeSBDValue(-1)">◀</button>
+				<span id="sbd_multiplierSpan">NONE</span>
+				<button class="sbd_button" onclick="changeSBDValue(1)">▶</button>
+			</span>
+			(Some spawners are not affected by multiplier, or can only be multiplied to a certain amount.)
 		</p>
 		<table id="sbd_table">
 			<thead>
@@ -92,9 +95,6 @@
 	<div id="map">
 		<h3>Map</h3>
 		<div id="mapSvgContainer">
-			<div id="mapTooltip">
-				Sample Text
-			</div>
 			<!-- Populated by script -->
 		</div>
 	</div>
@@ -103,6 +103,9 @@
 		<div id="mpsdiv">
 			<!-- Populated by script -->
 		</div>
+	</div>
+	<div id="popupToolTip">
+		Sample Text
 	</div>
 </div>
 

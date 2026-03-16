@@ -219,6 +219,24 @@ tbody th, td {
 	background-color: #0000007f;
 }
 
+#sat .svgContainer {
+	height: 7em;
+	padding: 0 1em;
+	display: block;
+	margin: 1em auto;
+	border: 2px solid #4C4AEC;
+	background-color: #0000002f;
+	overflow-x: auto;
+	overflow-y: hidden;
+	width: 96%;
+	max-width: 70vw;
+	scrollbar-color: #CACDFFBF #4C4AEC;
+}
+
+#sat .svgContainer::-webkit-scrollbar {
+	color: red;
+}
+
 #essdiv img {
 	max-height: 40vh;
 	border: 2px solid #4C4AEC;
@@ -283,7 +301,7 @@ tbody th, td {
 	display: block;
 }
 
-#mapTooltip {
+#popupToolTip {
 	position: absolute;
 	visibility: hidden;
 	background-color: #067095;
