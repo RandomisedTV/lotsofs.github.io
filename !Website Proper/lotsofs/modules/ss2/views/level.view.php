@@ -7,6 +7,10 @@
 	<div id="psl">
 		<h3>Plot, Story, Lore</h3>
 		<p id="psl_p">Level .dsc file blurb</p>
+		<ul>
+			<li>dsfaa</li>
+			<li>afdaf</li>
+		</ul>
 	</div>
 	<div id="ccr">
 		<h3>Chapter Completion Requirements</h3>
@@ -50,10 +54,10 @@
 		<h3>Spawners & Timings</h3>
 		<div id="satdiv">
 			<!-- Populated by script -->
-			 <table id="templateTable">
+			 <table id="satTemplateTable">
 				<thead>
 					<tr>
-						<td colspan="2" data-field="unitType"></id>
+						<th colspan="2" data-field="unitType"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -64,7 +68,7 @@
 					<tr class="fatterTopBorder"><th>Total number</th><td data-field="totalNumber"></td></tr>
 					<tr><th>Number in group</th><td data-field="numberInGroup"></td></tr>
 					<tr><th>Initial delay</th><td data-field="initialDelay"></td></tr>
-					<tr><th>Initial delay from script</th><td data-field="initialDelayFromScript"></td></tr>
+					<tr><th>Initial delay from script</th><td data-field="initialDelayByScript"></td></tr>
 					<tr><th>Single delay</th><td data-field="singleDelay"></td></tr>
 					<tr><th>Group delay</th><td data-field="groupDelay"></td></tr>
 					<tr><th>Spawnee death delay</th><td data-field="spawneeDeathDelay"></td></tr>

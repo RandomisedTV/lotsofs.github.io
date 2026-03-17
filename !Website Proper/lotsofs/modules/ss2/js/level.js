@@ -211,7 +211,7 @@ function populateSATSection() {
 		let spawners = spawnerGroup.spawners;
 
 		spawners.forEach((s, spawnerIdx) => {
-			appendChildToElement(div, "h4", s.name);
+			// appendChildToElement(div, "h4", s.name);
 			let spawnees = [];
 			let elapsedTime = 0;
 			for (let i = 0; i < s.totalNumber; i++) {
@@ -222,9 +222,13 @@ function populateSATSection() {
 				const pin = generateSATSVGTimelinePin(spawnee, s, pinWidth, spawnerIdx);
 				g.appendChild(pin);
 			}
+            div.appendChild(generateSATTable(s, spawnees));
 			svgWidth = Math.max(svgWidth, elapsedTime*1000 + pinWidth);
 			svgHeight = spawnerIdx * 100 + 100;
 		})
+        console.log(spawnerGroup);
+        appendChildToElement(div, "p", spawnerGroup.note)
+
 		svg.setAttribute("width", svgWidth / 10);
 		svg.setAttribute("height", "100%");
 		svg.setAttribute("preserveAspectRatio", "none");
@@ -237,6 +241,49 @@ function populateSATSection() {
 		svgContainerDiv.classList.add("svgContainer");
 		svgContainerDiv.appendChild(svg);
 	})
+}
+
+function generateSATTable(spawner, spawnees) {
+    const template = document.getElementById("satTemplateTable");
+    const clone = template.cloneNode(true);
+    clone.removeAttribute("id");
+
+    clone.querySelectorAll("[data-field]").forEach(elem => {
+        const key = elem.getAttribute("data-field");
+        switch(key) {
+            case "unitType":
+                elem.textContent = spawner.name;
+                break;
+            // case "spawnType":
+            //     elem.textContent = spawner.spawnType;
+            //     break;
+            case "spawnEffectConfiguration":
+                const appendSEC = spawner.spawnEffectType ? ` (${spawner.spawnEffectType})` : ""
+                elem.textContent = `${spawner.spawnEffectDelay??0} s ${appendSEC}`;
+                break;
+            case "launcher":
+                const appendL = spawner.spawnLaunchType ? ` (${spawner.spawnLaunchType})` : ""
+                elem.textContent = `${spawner.spawnEffectDelay??0} s ${appendL}`;
+                break;
+            // case "spawnFormation":
+            //     elem.textContent = spawner.spawnFormation;
+            //     break;
+            case "initialDelay":
+            case "initialDelayByScript":
+            case "singleDelay":
+            case "groupDelay":
+            case "spawneeDeathDelay":
+                elem.textContent = `${spawner[key]??0} s`;
+                break;
+            case "totalSpawntime": 
+                elem.textContent = `${spawnees[spawnees.length-1].puppet} s`;
+                break;
+            default:
+                elem.textContent = spawner[key] ?? "";
+                break;
+        }
+    });
+    return clone;
 }
 
 function generateSATSpawneeData(s, elapsedTime, i) {
@@ -266,9 +313,9 @@ function generateSATSpawneeData(s, elapsedTime, i) {
 		elapsedTime += s.singleDelay;
 	}
 	spawnee.effect = elapsedTime;
-	spawnee.egg = spawnee.effect + s.spawnEffectDelay;
-	spawnee.puppet = spawnee.egg + s.spawnLaunchDuration;
-	spawnee.death = spawnee.puppet + s.timeToKill;
+	spawnee.egg = spawnee.effect + (s.spawnEffectDelay??0);
+	spawnee.puppet = spawnee.egg + (s.spawnLaunchDuration??0);
+	spawnee.death = spawnee.puppet + (s.timeToKill??0);
 	return spawnee;
 }
 

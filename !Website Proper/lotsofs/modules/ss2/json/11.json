@@ -1,5 +1,11 @@
 {
 	"eta": 600,
+  "secrets": 4,
+  "objectives": [
+    "pass htrough canyon anarrow",
+    "go hill over - Use dino creature",
+    "Eneter monke moauth"
+  ],
 	"chapters": [
 		{
 			"id": 1,
@@ -343,13 +349,17 @@
 	"spawnerGroups": [
 		{
 			"groupName": "Chapter 3 dropships",
+      "note": "Left and right dropships both take a while to fly in. The right dropship generally does not arrive before the left dropship finishes dropping its units. Timing is from the first drop of the left dropship. The second dropship's timing is estimated and rounded.",
 			"spawners": [
 				{
 					"name": "Left Dropship First Commander",
 					"color": "#00ff00",
 					"spawnType": "simple",
 					"spawnEffectDelay": 0,
+          "spawnEffectType": "",
 					"spawnLaunchDuration": 0,
+          "spawnLaunchType": "",
+          "spawnFormation": "?????",
 					"totalNumber": 1,
 					"numberInGroup": 1,
 					"initialDelay": 0,
@@ -364,7 +374,10 @@
 					"color": "#00ff00",
 					"spawnType": "simple",
 					"spawnEffectDelay": 0,
+          "spawnEffectType": "",
 					"spawnLaunchDuration": 0,
+          "spawnLaunchType": "",
+          "spawnFormation": "?????",
 					"totalNumber": 9,
 					"numberInGroup": 3,
 					"initialDelay": 0,
@@ -379,7 +392,10 @@
 					"color": "#ff0000",
 					"spawnType": "simple",
 					"spawnEffectDelay": 0,
+          "spawnEffectType": "",
 					"spawnLaunchDuration": 0,
+          "spawnLaunchType": "",
+          "spawnFormation": "?????",
 					"totalNumber": 12,
 					"numberInGroup": 4,
 					"initialDelay": 0,
