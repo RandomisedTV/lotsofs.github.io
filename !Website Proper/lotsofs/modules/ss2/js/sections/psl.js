@@ -12,10 +12,10 @@ async function setDescription(levelData) {
 	const levelId = levelData.id;
 	try {
 		let levelDsc = await readTextFileAsync(`/modules/ss2/text/${levelId}.dsc`);
-		setElementByIdInnerText("psl_p",levelDsc)
+		setElementByIdTextContent("psl_p",levelDsc)
 	}
 	catch (err) {
-		setElementByIdInnerText("psl_p","");
+		setElementByIdTextContent("psl_p","");
 		console.log(err);
 	}
 }

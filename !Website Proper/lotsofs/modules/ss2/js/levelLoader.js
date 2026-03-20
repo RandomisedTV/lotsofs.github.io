@@ -12,7 +12,6 @@ export function getLevelId() {
 export async function initLevel() {
 	const levelElement = document.getElementById('levelInfo');
 	levelId = levelElement.dataset.id;
-	// setElementByIdInnerText("mapName",levelElement.dataset.name)
 	try {
 		const jsonData = await readJsonFileAsync(`/modules/ss2/json/${levelId}.json`);
 		levelData = jsonData;

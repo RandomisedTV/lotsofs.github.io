@@ -29,7 +29,7 @@ export const waa = {
 				else {
 					cell.classList.add("bold");
 				}
-				cell.innerText = ammoCount;
+				cell.textContent = ammoCount;
 				tr.appendChild(cell);
 			});
 		}

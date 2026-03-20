@@ -15,6 +15,8 @@ async function start() {
 	await initLevel();
 	levelData = getLevelData();
 
+	setElementByIdTextContent("mapName", levelData.name);
+
 	psl.populate(levelData);
 	waa.populate(levelData);
 	ccr.populate(levelData);

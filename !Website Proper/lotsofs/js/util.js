@@ -41,9 +41,9 @@ function appendChildToElement(parent, childTag, childTextContent = "") {
 	return element
 }
 
-function setElementByIdInnerText(id, text) {
+function setElementByIdTextContent(id, text) {
 	const element = document.getElementById(id);
-	element.innerText = text;
+	element.textContent = text;
 }
 
 function createSVGElement(tag) {

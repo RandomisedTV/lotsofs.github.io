@@ -41,6 +41,8 @@ async function build(levelData) {
 	}
 }
 
+// Terrible AI generated code.
+// Somewhat double checked by me, but idk regex
 function highlightText(txt) {
 	let text = txt;
 	// VARIABLE=blahblah
