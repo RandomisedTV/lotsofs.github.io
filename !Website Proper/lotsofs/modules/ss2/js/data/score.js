@@ -1,0 +1,17 @@
+export const scoreInformation = {
+	"Auto Shotgun": 100,
+	"Barbarian": 200,
+	"Chicken": 100,
+	"Hand Grenades": 5,
+	"Helmet": 5,
+	"Orc Commander": 40,
+	"Orc Destroyer": 20,
+	"Orc Grunt": 10,
+	"Rocket Launcher": 100,
+	"Rollerball": 200,
+	"Shells": 5,
+	"Small Health": 10,
+	"Treasure Bag": 1000,
+	"Treasure Chest": 5000,
+	"Treasure Coin": 100,
+}

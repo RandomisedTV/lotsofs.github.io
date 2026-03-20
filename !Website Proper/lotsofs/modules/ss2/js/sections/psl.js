@@ -1,0 +1,21 @@
+export const psl = {
+	populate(levelData) {
+		const div = document.getElementById("psl_div");
+		levelData.objectives.forEach((o, i) => {
+			appendChildToElement(div, "p", o);
+		})
+		setDescription(levelData);
+	}
+}
+
+async function setDescription(levelData) {
+	const levelId = levelData.id;
+	try {
+		let levelDsc = await readTextFileAsync(`/modules/ss2/text/${levelId}.dsc`);
+		setElementByIdInnerText("psl_p",levelDsc)
+	}
+	catch (err) {
+		setElementByIdInnerText("psl_p","");
+		console.log(err);
+	}
+}

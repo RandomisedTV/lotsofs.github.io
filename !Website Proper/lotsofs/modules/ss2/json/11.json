@@ -1,11 +1,13 @@
 {
+	"name": "Jungle",
+	"id": 11,
 	"eta": 600,
-  "secrets": 4,
-  "objectives": [
-    "pass htrough canyon anarrow",
-    "go hill over - Use dino creature",
-    "Eneter monke moauth"
-  ],
+	"secrets": 4,
+	"objectives": [
+		"Pass through canyon.",
+		"Go over the hill. Use Dino creature.",
+		"Enter monkey's mouth."
+	],
 	"chapters": [
 		{
 			"id": 1,
@@ -349,17 +351,17 @@
 	"spawnerGroups": [
 		{
 			"groupName": "Chapter 3 dropships",
-      "note": "Left and right dropships both take a while to fly in. The right dropship generally does not arrive before the left dropship finishes dropping its units. Timing is from the first drop of the left dropship. The second dropship's timing is estimated and rounded.",
+			"note": "Left and right dropships both take a while to fly in. The right dropship generally does not arrive before the left dropship finishes dropping its units. Timing is from the first drop of the left dropship. Arrival time of second dropship is estimated.",
 			"spawners": [
 				{
 					"name": "Left Dropship First Commander",
 					"color": "#00ff00",
 					"spawnType": "simple",
 					"spawnEffectDelay": 0,
-          "spawnEffectType": "",
+					"spawnEffectType": "",
 					"spawnLaunchDuration": 0,
-          "spawnLaunchType": "",
-          "spawnFormation": "?????",
+					"spawnLaunchType": "",
+					"spawnFormation": "",
 					"totalNumber": 1,
 					"numberInGroup": 1,
 					"initialDelay": 0,
@@ -367,17 +369,18 @@
 					"groupDelay": 1,
 					"spawneeDeathDelay": 0,
 					"timeToKill": 0,
-					"initialDelayByScript": 0
+					"initialDelayByScript": 0,
+					"otherInitialDelay": 0
 				},
 				{
 					"name": "Left Dropship Multispawner",
 					"color": "#00ff00",
 					"spawnType": "simple",
 					"spawnEffectDelay": 0,
-          "spawnEffectType": "",
+					"spawnEffectType": "",
 					"spawnLaunchDuration": 0,
-          "spawnLaunchType": "",
-          "spawnFormation": "?????",
+					"spawnLaunchType": "",
+					"spawnFormation": "",
 					"totalNumber": 9,
 					"numberInGroup": 3,
 					"initialDelay": 0,
@@ -385,17 +388,18 @@
 					"groupDelay": 1,
 					"spawneeDeathDelay": 0,
 					"timeToKill": 0,
-					"initialDelayByScript": 1
+					"initialDelayByScript": 1,
+					"otherInitialDelay": 0
 				},
 				{
 					"name": "Right Dropship Multispawner",
 					"color": "#ff0000",
 					"spawnType": "simple",
 					"spawnEffectDelay": 0,
-          "spawnEffectType": "",
+					"spawnEffectType": "",
 					"spawnLaunchDuration": 0,
-          "spawnLaunchType": "",
-          "spawnFormation": "?????",
+					"spawnLaunchType": "",
+					"spawnFormation": "",
 					"totalNumber": 12,
 					"numberInGroup": 4,
 					"initialDelay": 0,
@@ -403,7 +407,8 @@
 					"groupDelay": 1,
 					"spawneeDeathDelay": 0,
 					"timeToKill": 0,
-					"initialDelayByScript": 8
+					"initialDelayByScript": 0,
+					"otherInitialDelay": 8
 				}
 			]
 		}
@@ -442,11 +447,58 @@
 		]
 	},
 	"macros": [
-		{ "title": "Chapter 1", "fileName": "Macro001" },
-		{ "title": "Pressure Plate Puzzle", "fileName": "Simple" },
-		{ "title": "Chapter 2", "fileName": "Chapter002_Fights" },
-		{ "title": "Chapter 3", "fileName": "Macro003" },
-		{ "title": "Chapter 4", "fileName": "Macro004" },
-		{ "title": "Chapter Control", "fileName": "ChapterControl" }
+		{ 
+			"title": "Chapter 1", 
+			"fileName": "Macro001",
+			"badVars": [
+				"Fighter",
+				"Fighter01",
+				"Simba01",
+				"SciFi1st",
+				"FirstSciFi",
+				"SimbaFemalePanic",
+				"SciFi02"
+			]
+		},
+		{ 
+			"title": "Pressure Plate Puzzle", 
+			"fileName": "Simple",
+			"badVars": [
+				"varPlate"
+			]
+		},
+		{ 
+			"title": "Chapter 2", 
+			"fileName": "Chapter002_Fights",
+			"badVars": [
+				"Commander_Spawnee",
+				"SciFi_Grunt",
+				"Dropship_Spawnee",
+				"Mentals_Dropship_field",
+				"RollingBall_Spawnee"
+			]
+		},
+		{ 
+			"title": "Chapter 3", 
+			"fileName": "Macro003",
+			"badVars": [
+				"Dropship",
+				"Dropship02",
+				"Commander_Spawnee"
+			]
+		},
+		{ 
+			"title": "Chapter 4", 
+			"fileName": "Macro004",
+			"badVars": [
+				"Barbarian"
+			]
+		},
+		{ 
+			"title": "Chapter Control", 
+			"fileName": "ChapterControl",
+			"badVars": [
+			]
+		}
 	]
 }

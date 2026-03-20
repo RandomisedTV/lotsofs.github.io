@@ -7,10 +7,10 @@
 	<div id="psl">
 		<h3>Plot, Story, Lore</h3>
 		<p id="psl_p">Level .dsc file blurb</p>
-		<ul>
-			<li>dsfaa</li>
-			<li>afdaf</li>
-		</ul>
+		<div id="psl_div">
+			<h4>MISSION OBJECTIVES</h4>
+				<!-- Populated by script -->
+		</div>
 	</div>
 	<div id="ccr">
 		<h3>Chapter Completion Requirements</h3>
@@ -52,30 +52,36 @@
 	</div>
 	<div id="sat">
 		<h3>Spawners & Timings</h3>
+		<p>
+			V2.090: 
+			<input type="checkbox" id="sat_checkbox"></input>
+			(Enemy spawners behave differently on this version due to a bug.)
+		</p>
 		<div id="satdiv">
 			<!-- Populated by script -->
-			 <table id="satTemplateTable">
-				<thead>
-					<tr>
-						<th colspan="2" data-field="unitType"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="fatterTopBorder"><th>Spawn type</th><td data-field="spawnType"></td></tr>
-					<tr><th>Spawn effect configuration</th><td data-field="spawnEffectConfiguration"></td></tr>
-					<tr><th>Launcher</th><td data-field="launcher"></td></tr>
-					<tr><th>Spawn Formation</th><td data-field="spawnFormation"></td></tr>
-					<tr class="fatterTopBorder"><th>Total number</th><td data-field="totalNumber"></td></tr>
-					<tr><th>Number in group</th><td data-field="numberInGroup"></td></tr>
-					<tr><th>Initial delay</th><td data-field="initialDelay"></td></tr>
-					<tr><th>Initial delay from script</th><td data-field="initialDelayByScript"></td></tr>
-					<tr><th>Single delay</th><td data-field="singleDelay"></td></tr>
-					<tr><th>Group delay</th><td data-field="groupDelay"></td></tr>
-					<tr><th>Spawnee death delay</th><td data-field="spawneeDeathDelay"></td></tr>
-					<tr class="fatterTopBorder"><th>Total spawntime</th><td data-field="totalSpawntime"></td></tr>
-				</tbody>
-			 </table>
 		</div>
+		<table id="satTemplateTable">
+			<thead>
+				<tr>
+					<th colspan="2" data-field="unitType"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="fatterTopBorder"><th>Spawn type</th><td data-field="spawnType"></td></tr>
+				<tr><th>Spawn effect configuration</th><td data-field="spawnEffectConfiguration"></td></tr>
+				<tr><th>Launcher</th><td data-field="launcher"></td></tr>
+				<tr><th>Spawn Formation</th><td data-field="spawnFormation"></td></tr>
+				<tr class="fatterTopBorder"><th>Total number</th><td data-field="totalNumber"></td></tr>
+				<tr><th>Number in group</th><td data-field="numberInGroup"></td></tr>
+				<tr><th>Initial delay</th><td data-field="initialDelay"></td></tr>
+				<tr><th>Initial delay from script</th><td data-field="initialDelayByScript"></td></tr>
+				<tr><th>Other initial delays</th><td data-field="otherInitialDelay"></td></tr>
+				<tr><th>Single delay</th><td data-field="singleDelay"></td></tr>
+				<tr><th>Group delay</th><td data-field="groupDelay"></td></tr>
+				<tr><th>Spawnee death delay</th><td data-field="spawneeDeathDelay"></td></tr>
+				<tr class="fatterTopBorder"><th>Total spawntime</th><td data-field="totalSpawntime"></td></tr>
+			</tbody>
+		 </table>
 	</div>
 	<div id="ess">
 		<h3>Editor Screenshots</h3>
@@ -88,9 +94,9 @@
 		<p>
 			<span class="sbd_multiplierText">
 				Enemy Multiplier: 
-				<button class="sbd_button" onclick="changeSBDValue(-1)">◀</button>
+				<button class="sbd_button" id="sbd_button_l">◀</button>
 				<span id="sbd_multiplierSpan">NONE</span>
-				<button class="sbd_button" onclick="changeSBDValue(1)">▶</button>
+				<button class="sbd_button" id="sbd_button_r">▶</button>
 			</span>
 			(Some spawners are not affected by multiplier, or can only be multiplied to a certain amount.)
 		</p>
@@ -116,6 +122,35 @@
 				<!-- Populated by script -->
 			</tbody>
 		</table>
+		<table id="sbd_endScreenTable">
+			<tr>
+				<th>Score:</th><td data-field="baseScore">#</td><th>Bonuses:</th>
+			</tr>
+			<tr>
+				<th>Difficulty:</th><td data-field="difficultyName">Serious</td><td data-field="difficultyScore">10000</td>
+			</tr>
+			<tr>
+				<th>Kills:</th><td data-field="killCount">#</td><td data-field="killScore"># * 10</td>
+			</tr>
+			<tr>
+				<th>Secrets:</th><td data-field="secretCount">X/Y</td><td data-field="secretScore">1000/Y*X</td>
+			</tr>
+			<tr>
+				<th>Lives:</th><td data-field="livesCount">L=floor(Total score / 10000)+3</td><td data-field="livesScore">L*1000</td>
+			</tr>
+			<tr>
+				<th>Playtime:</th><td data-field="playtime">00:00:00</td><th>Time Bonus:</th>
+			</tr>
+			<tr>
+				<th>Est. Time:</th><td data-field="estimatedTime">99:99:99</td><td data-field="timeScore">EstTime-Playtime*10 (in sec)</td>
+			</tr>
+			<tr>
+				<th colspan="2">Total Bonus:</th><td data-field="totalBonus">#####</td>
+			</tr>
+			<tr>
+				<th colspan="2">Total Score:</th><th data-field="totalScore">#####</th>
+			</tr>
+		</table>
 	</div>
 	<div id="map">
 		<h3>Map</h3>
@@ -138,6 +173,6 @@
 	data-id="<?= $levelId ?>"
 	data-name="<?= $levelName ?>"
 ></div>
-<script src="/modules/ss2/js/level.js"></script>
+<script type="module" src="/modules/ss2/js/level.js"></script>
 
 <?php require(__MODULES__ . '/ss2/views/partials/foot.php') ?>
