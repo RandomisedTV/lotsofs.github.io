@@ -25,3 +25,9 @@ function urlIs($value) {
 function urlStartsWith($value) {
 	return str_starts_with($_SERVER['REQUEST_URI'], $value);
 }
+
+function getLastUrlPart() {
+	$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+	$parts = explode('/', trim($path, '/'));
+	return end($parts);
+}

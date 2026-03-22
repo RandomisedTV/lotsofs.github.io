@@ -171,7 +171,6 @@
 
 <div id="levelInfo"
 	data-id="<?= $levelId ?>"
-	data-name="<?= $levelName ?>"
 ></div>
 <script type="module" src="/modules/ss2/js/level.js"></script>
 

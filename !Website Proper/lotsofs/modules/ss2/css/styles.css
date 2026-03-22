@@ -105,7 +105,7 @@ div.subnavbox {
 
 @container (max-width: 667px) {
 	div.subnavbox {
-		visibility: hidden;
+		display: none;
 	}
 }
 
@@ -135,10 +135,6 @@ div.subnavbox nav a {
 	white-space: nowrap;
 	margin: 0.5em;
 	text-decoration: none;
-}
-
-div.subnavbox nav a {
-	font-size: 1.1em;
 }
 
 div.subnavbox nav a {
@@ -225,10 +221,11 @@ tbody th, td {
 }
 
 #psl_p {
-	max-width: 375px;
+	max-width: 370px;
 	background-color: #023951;
 	margin-bottom: 2em;
 	float: left;
+	white-space: pre-wrap;
 }
 
 #psl_div {
@@ -246,10 +243,8 @@ tbody th, td {
 }
 
 #psl_div p {
-	/* background-color: #14313C; */
 	margin-left: 0.5em;
 	list-style-type: none;
-	/* border: solid 3px #0F2E3A; */
 	padding: .2em;
 	color: #ffffff
 }
@@ -295,11 +290,11 @@ tbody th, td {
 
 #satdiv table.v090 td,
 #satdiv table.v090 th {
-	background-color: #FF000D2F;
+	background-color: #FFFF002F;
 }
 
 #sat .v090 {
-	background-color: #FF000D2F;
+	background-color: #FFFF002F;
 	scrollbar-color: #FFFF00 #FF000D;
 }
 
@@ -329,7 +324,7 @@ tbody th, td {
 
 .multiplierActive td,
 .multiplierActive th  {
-	background-color: #FF000D2F;
+	background-color: #FFFF002F;
 }
 
 #sbd_table .sbd_nextarea td {
@@ -378,7 +373,7 @@ tbody th, td {
 
 #popupToolTip {
 	position: absolute;
-	visibility: hidden;
+	display: none;
 	background-color: #067095;
 	border: solid 1px #023951;
 	padding: .1em;

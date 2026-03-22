@@ -1,4 +1,5 @@
 import { scoreInformation } from "../data/score.js";
+import { tooltipPopup } from "../ui/tooltip.js";
 
 let cumulativeLevelScore = 0;
 let cumulativeLevelKills = 0;
@@ -25,7 +26,6 @@ export const sbd = {
 	},
 
 	changeMultiplier(change) {
-		console.log(change);
 		enemyMultiplier += change;
 		enemyMultiplier %= 11;
 		if (enemyMultiplier < 1) enemyMultiplier = 11;
@@ -129,9 +129,9 @@ function addSection(chapter, i) {
 			let multiplier = item.countsAsKill ? enemyMultiplier : 1;
 			if (multiplier > 1) {
 				row.classList.add("multiplierActive");
-			}
-			if (item.maxMultiplier) {
-				multiplier = Math.min(multiplier, item.maxMultiplier);
+				if (item.maxMultiplier) {
+					multiplier = Math.max(Math.floor(item.maxMultiplier/11 * multiplier), 1);
+				}
 			}
 
 			let name = item.name;
@@ -144,15 +144,29 @@ function addSection(chapter, i) {
 			const countsAsKill = item.countsAsKill ?? false;
 
 			const totalWorth = worth * count;
-			cumulativeLevelScore += totalWorth;
-			cumulativeLevelKills += countsAsKill ? count : 0;
+
+			if (!item.impossible) {
+				cumulativeLevelScore += totalWorth;
+				cumulativeLevelKills += countsAsKill ? count : 0;
+			}
+			else if (item.killsItself) {
+				cumulativeLevelKills += countsAsKill ? count : 0;
+			}
 
 			appendChildToElement(row, "td", count);
 			appendChildToElement(row, "td", name);
-			appendChildToElement(row, "td", cumulativeLevelKills == previousCumulativeLevelKills ? "" : cumulativeLevelKills);
+			const tdCumKills = appendChildToElement(row, "td", cumulativeLevelKills == previousCumulativeLevelKills ? "" : cumulativeLevelKills);
 			appendChildToElement(row, "td", worth);
 			appendChildToElement(row, "td", totalWorth);
-			appendChildToElement(row, "td", cumulativeLevelScore);
+			const tdCumScore = appendChildToElement(row, "td", cumulativeLevelScore);
+			if (item.impossible) {
+				if (countsAsKill && !item.killsItself) {
+					tdCumKills.textContent = "*";
+					tooltipPopup.link(tdCumKills, item.impossible);
+				}
+				tdCumScore.textContent = "*";
+				tooltipPopup.link(tdCumScore, item.impossible);
+			}
 			
 			if (cumulativeLevelKills > previousCumulativeLevelKills) {
 				previousCumulativeLevelKills = cumulativeLevelKills;

@@ -32,15 +32,14 @@ export const map = {
 			circle.setAttribute("fill", m.color);
 			circle.setAttribute("stroke", "#000000");
 
+			tooltipPopup.link(circle, m.tooltip);
+
 			circle.addEventListener("mouseenter", e => {
 				circle.setAttribute("fill", "#ffffff");
-				tooltipPopup.show(m.tooltip);
 			});
 			circle.addEventListener("mouseleave", e => {
 				circle.setAttribute("fill", m.color);
-				tooltipPopup.hide();
 			});
-			circle.addEventListener("mousemove", tooltipPopup.move);
 
 			g.appendChild(circle);
 		})

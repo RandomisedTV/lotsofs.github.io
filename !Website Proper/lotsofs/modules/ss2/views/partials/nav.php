@@ -8,14 +8,14 @@
 		</div>
 		<div class="navbox">
 			<nav>
-				<a href="/ss2/1" class="<?= urlStartsWith("/ss2/1") ? "navCurrent" : "" ?>">General</a>
-				<a href="/ss2/2" class="<?= urlStartsWith("/ss2/2") ? "navCurrent" : "" ?>">M'Digbo</a>
-				<a href="/ss2/3" class="<?= urlStartsWith("/ss2/3") ? "navCurrent" : "" ?>">Magnor</a>
-				<a href="/ss2/4" class="<?= urlStartsWith("/ss2/4") ? "navCurrent" : "" ?>">Chi-Fang</a>
-				<a href="/ss2/5" class="<?= urlStartsWith("/ss2/5") ? "navCurrent" : "" ?>">Kleer</a>
-				<a href="/ss2/6" class="<?= urlStartsWith("/ss2/6") ? "navCurrent" : "" ?>">Ellenier</a>
-				<a href="/ss2/7" class="<?= urlStartsWith("/ss2/7") ? "navCurrent" : "" ?>">Kronor</a>
-				<a href="/ss2/8" class="<?= urlStartsWith("/ss2/8") ? "navCurrent" : "" ?>">Sirius</a>
+				<a href="/ss2/" class="<?= urlIs("/ss2/") ? "navCurrent" : "" ?>">General</a>
+				<a href="/ss2/1" class="<?= urlStartsWith("/ss2/1") ? "navCurrent" : "" ?>">M'Digbo</a>
+				<a href="/ss2/2" class="<?= urlStartsWith("/ss2/2") ? "navCurrent" : "" ?>">Magnor</a>
+				<a href="/ss2/3" class="<?= urlStartsWith("/ss2/3") ? "navCurrent" : "" ?>">Chi-Fang</a>
+				<a href="/ss2/4" class="<?= urlStartsWith("/ss2/4") ? "navCurrent" : "" ?>">Kleer</a>
+				<a href="/ss2/5" class="<?= urlStartsWith("/ss2/5") ? "navCurrent" : "" ?>">Ellenier</a>
+				<a href="/ss2/6" class="<?= urlStartsWith("/ss2/6") ? "navCurrent" : "" ?>">Kronor</a>
+				<a href="/ss2/7" class="<?= urlStartsWith("/ss2/7") ? "navCurrent" : "" ?>">Sirius</a>
 			</nav>
 		</div>
 		<div class="subnavbox">

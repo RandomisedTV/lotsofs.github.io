@@ -178,15 +178,13 @@ function generateTimelinePin(spawnee, s, spawnerIdx) {
 	pin.setAttribute("y", spawnerIdx * 100);
 	pin.setAttribute("height", 100);
 	pin.setAttribute("fill", s.color);
+	tooltipPopup.link(pin, tooltipText);
 	pin.addEventListener("mouseenter", e => {
 		pin.setAttribute("fill", "#ffffff");
-		tooltipPopup.show(tooltipText);
 	});
 	pin.addEventListener("mouseleave", e => {
 		pin.setAttribute("fill", s.color);
-		tooltipPopup.hide();
 	});
-	pin.addEventListener("mousemove", tooltipPopup.move);
 	return pin;
 }
 

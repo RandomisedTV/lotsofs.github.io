@@ -1,5 +1,4 @@
-import { initLevel } from "./levelLoader.js";
-import { getLevelData } from "./levelLoader.js";
+import { initLevel, getLevelData } from "./levelLoader.js";
 import { psl } from "./sections/psl.js";
 import { waa } from "./sections/waa.js";
 import { ccr } from "./sections/ccr.js";
@@ -11,48 +10,21 @@ import { mps } from "./sections/mps.js";
 
 let levelData;
 
-async function start() {
+async function run() {
 	await initLevel();
 	levelData = getLevelData();
 
 	setElementByIdTextContent("mapName", levelData.name);
 
-	psl.populate(levelData);
-	waa.populate(levelData);
-	ccr.populate(levelData);
-	sat.populate(levelData);
-	ess.populate(levelData);
-	sbd.populate(levelData);
-	map.populate(levelData);
-	mps.populate(levelData);
+	const sections = [psl, waa, ccr, sat, ess, sbd, map, mps];
+	sections.forEach(section => {
+		try {
+			section.populate(levelData);
+		}
+		catch (err) {
+			console.error(`Failed to populate section`, section, err);
+		}
+	})
 }
 
-start();
-
-
-async function setLevelData() {
-	try {
-		levelData.chapters.forEach((chapter, i) => {
-			if (Object.keys(chapter).length == 0) {
-				return;
-			}
-			addCCRRow(chapter, i);
-			addWAARatioCell(chapter, i);
-			addSBDSection(chapter, i);
-		});
-		setPSLObjectives();
-		populateWAATable();
-		generateMAPSvg();
-		populateSATSection();
-		populateESSSection();
-		populateMPSSection();
-		setPSLDsc();
-	}
-	catch (err) {
-		console.log(err);
-	}
-}
-
-/* AUTORUN */
-
-// initLevel();
+run();

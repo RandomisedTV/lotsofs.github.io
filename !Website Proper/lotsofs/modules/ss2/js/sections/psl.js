@@ -16,6 +16,6 @@ async function setDescription(levelData) {
 	}
 	catch (err) {
 		setElementByIdTextContent("psl_p","");
-		console.log(err);
+		console.error("Level Description file not found", "levelId", err);
 	}
 }

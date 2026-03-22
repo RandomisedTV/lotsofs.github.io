@@ -27,8 +27,8 @@
 				"cannonBalls": -1,
 				"seriousBombs": -1
 			},
-			"addedWeapons": {
-			},
+			"addedWeapons": [
+			],
 			"points": {
 				"Starting Village": [
 					{ 
@@ -66,6 +66,13 @@
 						"count": 1,
 						"countsAsKill": false,
 						"note": "Score at the basketball hoop"
+					},
+					{
+						"name": "Fighter Jet",
+						"count": 4,
+						"countsAsKill": false,
+						"impossible": "Can not be killed with starting weapon set",
+						"note": "Decorative flyby"
 					}
 				],
 				"Pond and Waterfall": [
@@ -145,9 +152,9 @@
 				"cannonBalls": -1,
 				"seriousBombs": -1
 			},
-			"addedWeapons": {
-				"autoShotgun": true
-			},
+			"addedWeapons": [
+				"autoShotgun"
+			],
 			"points": {
 				"Football field": [
 					{ 
@@ -205,6 +212,13 @@
 						"name": "Orc Grunt",
 						"count": 6,
 						"countsAsKill": true
+					},
+					{
+						"name": "Dropship",
+						"count": 1,
+						"countsAsKill": false,
+						"impossible": "Has 999999 HP",
+						"note": "Decorative flyby"
 					}
 				],
 				"Hidden cave": [
@@ -225,6 +239,13 @@
 						"count": 1,
 						"countsAsKill": false,
 						"note": "In crate"
+					},
+					{
+						"name": "Neanderthal",
+						"count": 1,
+						"countsAsKill": false,
+						"impossible": "Marked as invulnerable in script, requires cannon",
+						"note": "Teleporter destruction scene"
 					}
 				]
 			}
@@ -247,9 +268,9 @@
 				"cannonBalls": -1,
 				"seriousBombs": -1
 			},
-			"addedWeapons": {
-				"autoShotgun": true
-			},
+			"addedWeapons": [
+				"autoShotgun"
+			],
 			"points": {
 				"Waterfall": [
 					{
@@ -280,6 +301,13 @@
 						"count": 3,
 						"countsAsKill": true,
 						"note": ""
+					},
+					{
+						"name": "Dropship",
+						"count": 1,
+						"countsAsKill": false,
+						"impossible": "Has 999999 HP, marked as invulnerable",
+						"note": ""
 					}
 				],
 				"Right Dropship": [
@@ -303,6 +331,13 @@
 						"countsAsKill": true,
 						"note": "",
 						"maxMultiplier": 10
+					},
+					{
+						"name": "Dropship",
+						"count": 1,
+						"countsAsKill": false,
+						"impossible": "Has 999999 HP, marked as invulnerable",
+						"note": ""
 					}
 				]
 			}
@@ -325,9 +360,9 @@
 				"cannonBalls": -1,
 				"seriousBombs": -1
 			},
-			"addedWeapons": {
-				"autoShotgun": true
-			},
+			"addedWeapons": [
+				"autoShotgun"
+			],
 			"points": {
 				"Monkey Cave": [
 					{ 
@@ -451,20 +486,22 @@
 			"title": "Chapter 1", 
 			"fileName": "Macro001",
 			"badVars": [
-				"Fighter",
 				"Fighter01",
 				"Simba01",
-				"SciFi1st",
 				"FirstSciFi",
-				"SimbaFemalePanic",
 				"SciFi02"
+			],
+			"goodVars": [
+				"SimbaFemalePanic",
+				"SimbaChildPanic"
 			]
 		},
 		{ 
 			"title": "Pressure Plate Puzzle", 
 			"fileName": "Simple",
 			"badVars": [
-				"varPlate"
+			],
+			"goodVars": [
 			]
 		},
 		{ 
@@ -476,15 +513,19 @@
 				"Dropship_Spawnee",
 				"Mentals_Dropship_field",
 				"RollingBall_Spawnee"
+			],
+			"goodVars": [
 			]
 		},
 		{ 
 			"title": "Chapter 3", 
 			"fileName": "Macro003",
 			"badVars": [
-				"Dropship",
-				"Dropship02",
 				"Commander_Spawnee"
+			],
+			"goodVars": [
+				"Dropship",
+				"Dropship02"
 			]
 		},
 		{ 
@@ -492,12 +533,16 @@
 			"fileName": "Macro004",
 			"badVars": [
 				"Barbarian"
+			],
+			"goodVars": [
 			]
 		},
 		{ 
 			"title": "Chapter Control", 
 			"fileName": "ChapterControl",
 			"badVars": [
+			],
+			"goodVars": [
 			]
 		}
 	]
